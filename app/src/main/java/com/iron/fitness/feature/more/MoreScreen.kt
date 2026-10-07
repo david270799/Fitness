@@ -28,6 +28,7 @@ private data class MoreItem(
 )
 
 private val items = listOf(
+    MoreItem(Routes.library(), R.string.more_library, R.string.more_library_sub, IronIcons.List),
     MoreItem(Routes.SETTINGS, R.string.more_settings, R.string.more_settings_sub, IronIcons.Settings),
     MoreItem(Routes.ABOUT, R.string.more_about, R.string.more_about_sub, IronIcons.Info),
 )

@@ -36,7 +36,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.iron.fitness.R
 import com.iron.fitness.core.settings.AppSettings
 import com.iron.fitness.core.settings.ThemeMode
+import com.iron.fitness.core.ui.IronIcons
+import com.iron.fitness.core.ui.components.FlatProgressBar
+import com.iron.fitness.core.ui.components.GhostButton
 import com.iron.fitness.core.ui.components.IronCard
+import com.iron.fitness.core.ui.components.PrimaryButton
+import com.iron.fitness.core.ui.components.SecondaryButton
+import com.iron.fitness.core.util.Fmt
+import com.iron.fitness.feature.exercises.images.ExerciseImages
 import com.iron.fitness.core.ui.components.IronScaffold
 import com.iron.fitness.core.ui.components.ListRow
 import com.iron.fitness.core.ui.components.SectionTitle
@@ -61,6 +68,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             AppearanceSection(settings, viewModel)
+            ImagesSection(viewModel)
             Spacer(Modifier.height(24.dp))
         }
     }
@@ -145,5 +153,40 @@ private fun ThemeTile(
             color = palette.text,
             maxLines = 1,
         )
+    }
+}
+
+@Composable
+private fun ImagesSection(viewModel: SettingsViewModel) {
+    val download by viewModel.imageDownload.collectAsStateWithLifecycle()
+    val cached by viewModel.cachedBytes.collectAsStateWithLifecycle()
+    val total by viewModel.totalImages.collectAsStateWithLifecycle()
+    SectionTitle(stringResource(R.string.settings_section_images))
+    IronCard {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.images_info), style = MaterialTheme.typography.bodyMedium, color = Iron.colors.textSecondary)
+            if (total > 0) {
+                val estimateMb = total * ExerciseImages.AVG_IMAGE_BYTES / (1024.0 * 1024.0)
+                Text(stringResource(R.string.images_total, total, Fmt.num(estimateMb, 0)), style = MaterialTheme.typography.bodyMedium)
+            }
+            Text(stringResource(R.string.images_cached, Fmt.num(cached / (1024.0 * 1024.0), 1)), style = Iron.numbers.small)
+            val state = download
+            if (state != null && state.running) {
+                val progress = if (state.total > 0) state.done.toFloat() / state.total else 0f
+                FlatProgressBar(progress)
+                Text(stringResource(R.string.images_downloading, state.done, state.total), style = Iron.numbers.tiny)
+                SecondaryButton(stringResource(R.string.images_cancel), viewModel::cancelImageDownload, icon = IronIcons.Stop, modifier = Modifier.fillMaxWidth())
+            } else {
+                if (state != null && state.finished && state.total > 0) {
+                    Text(
+                        if (state.failed > 0) stringResource(R.string.images_failed, state.failed) else stringResource(R.string.images_done),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = if (state.failed > 0) Iron.colors.warning else Iron.colors.success,
+                    )
+                }
+                PrimaryButton(stringResource(R.string.images_download_all), viewModel::downloadAllImages, icon = IronIcons.Download, modifier = Modifier.fillMaxWidth())
+                GhostButton(stringResource(R.string.images_clear), viewModel::clearImageCache, color = Iron.colors.textSecondary)
+            }
+        }
     }
 }

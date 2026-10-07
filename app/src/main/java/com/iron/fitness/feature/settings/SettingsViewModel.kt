@@ -5,20 +5,54 @@ import androidx.lifecycle.viewModelScope
 import com.iron.fitness.core.settings.AppSettings
 import com.iron.fitness.core.settings.SettingsRepository
 import com.iron.fitness.core.settings.ThemeMode
+import com.iron.fitness.feature.exercises.data.ExerciseRepository
+import com.iron.fitness.feature.exercises.images.ExerciseImages
+import com.iron.fitness.feature.exercises.images.ImageDownloadState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val repo: SettingsRepository,
+    private val images: ExerciseImages,
+    private val exercises: ExerciseRepository,
 ) : ViewModel() {
 
     val settings: StateFlow<AppSettings> = repo.settings
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AppSettings())
+
+    val imageDownload: StateFlow<ImageDownloadState?> = images.observeState()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
+
+    private val _cachedBytes = MutableStateFlow(0L)
+    val cachedBytes: StateFlow<Long> = _cachedBytes.asStateFlow()
+
+    private val _totalImages = MutableStateFlow(0)
+    val totalImages: StateFlow<Int> = _totalImages.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            _totalImages.value = withContext(Dispatchers.IO) {
+                exercises.getAllOnce().filter { !it.isCustom }.sumOf { it.images.size }
+            }
+        }
+        viewModelScope.launch {
+            while (isActive) {
+                _cachedBytes.value = withContext(Dispatchers.IO) { images.cachedBytes() }
+                delay(if (imageDownload.value?.running == true) 1_500 else 5_000)
+            }
+        }
+    }
 
     private fun launch(block: suspend () -> Unit) {
         viewModelScope.launch { block() }
@@ -26,4 +60,11 @@ class SettingsViewModel @Inject constructor(
 
     fun setTheme(id: String) = launch { repo.setTheme(id) }
     fun setThemeMode(mode: ThemeMode) = launch { repo.setThemeMode(mode) }
+
+    fun downloadAllImages() = images.startDownloadAll()
+    fun cancelImageDownload() = images.cancel()
+    fun clearImageCache() = launch {
+        withContext(Dispatchers.IO) { images.clearCache() }
+        _cachedBytes.value = withContext(Dispatchers.IO) { images.cachedBytes() }
+    }
 }

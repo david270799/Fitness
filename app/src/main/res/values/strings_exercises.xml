@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_title">Библиотека</string>
+    <string name="library_pick_title">Выбор упражнения</string>
+    <string name="library_search_hint">Название упражнения</string>
+    <string name="library_loading">Загружаем библиотеку упражнений…</string>
+    <string name="library_empty">Ничего не найдено. Измените запрос или фильтры.</string>
+    <string name="library_add_custom">Своё упражнение</string>
+    <string name="library_filter_all">Все</string>
+    <string name="library_filter_custom">Мои</string>
+    <string name="library_filter_favorites">Избранное</string>
+    <string name="library_filter_muscle">Мышцы</string>
+    <string name="library_filter_equipment">Оборудование</string>
+    <string name="library_filter_any">любые</string>
+    <string name="library_add_selected">Добавить (%1$d)</string>
+    <string name="library_reset_filters">Сбросить фильтры</string>
+
+    <string name="category_strength">Силовые</string>
+    <string name="category_cardio">Кардио</string>
+    <string name="category_stretching">Растяжка</string>
+
+    <string name="record_weight_reps">Вес × повторы</string>
+    <string name="record_reps">Только повторы</string>
+    <string name="record_time">Время</string>
+
+    <string name="muscle_abdominals">Пресс</string>
+    <string name="muscle_abductors">Отводящие бедра</string>
+    <string name="muscle_adductors">Приводящие бедра</string>
+    <string name="muscle_biceps">Бицепс</string>
+    <string name="muscle_calves">Икры</string>
+    <string name="muscle_chest">Грудь</string>
+    <string name="muscle_forearms">Предплечья</string>
+    <string name="muscle_glutes">Ягодицы</string>
+    <string name="muscle_hamstrings">Задняя поверхность бедра</string>
+    <string name="muscle_lats">Широчайшие</string>
+    <string name="muscle_lower_back">Поясница</string>
+    <string name="muscle_middle_back">Середина спины</string>
+    <string name="muscle_neck">Шея</string>
+    <string name="muscle_quadriceps">Квадрицепс</string>
+    <string name="muscle_shoulders">Плечи</string>
+    <string name="muscle_traps">Трапеции</string>
+    <string name="muscle_triceps">Трицепс</string>
+
+    <string name="equipment_bands">Резина</string>
+    <string name="equipment_barbell">Штанга</string>
+    <string name="equipment_body_only">Собственный вес</string>
+    <string name="equipment_cable">Блок</string>
+    <string name="equipment_dumbbell">Гантели</string>
+    <string name="equipment_ez_bar">EZ-гриф</string>
+    <string name="equipment_exercise_ball">Фитбол</string>
+    <string name="equipment_foam_roll">Массажный ролик</string>
+    <string name="equipment_kettlebells">Гири</string>
+    <string name="equipment_machine">Тренажёр</string>
+    <string name="equipment_medicine_ball">Медбол</string>
+    <string name="equipment_other">Другое</string>
+    <string name="equipment_none">Без оборудования</string>
+
+    <string name="level_beginner">Новичок</string>
+    <string name="level_intermediate">Средний</string>
+    <string name="level_expert">Продвинутый</string>
+    <string name="mechanic_compound">Базовое</string>
+    <string name="mechanic_isolation">Изолирующее</string>
+    <string name="force_pull">Тяга</string>
+    <string name="force_push">Жим</string>
+    <string name="force_static">Статика</string>
+
+    <string name="exercise_title">Упражнение</string>
+    <string name="exercise_primary_muscles">Основные мышцы</string>
+    <string name="exercise_secondary_muscles">Вспомогательные мышцы</string>
+    <string name="exercise_technique">Техника</string>
+    <string name="exercise_my_settings">Мои настройки</string>
+    <string name="exercise_record_type">Тип записи</string>
+    <string name="exercise_rest">Отдых между подходами</string>
+    <string name="exercise_rest_default">По умолчанию (%1$s)</string>
+    <string name="exercise_note">Заметка</string>
+    <string name="exercise_note_hint">Например: хват, настройки тренажёра</string>
+    <string name="exercise_history">История и рекорды</string>
+    <string name="exercise_no_history">По этому упражнению ещё нет записей.</string>
+    <string name="exercise_favorite_add">В избранное</string>
+    <string name="exercise_favorite_remove">Убрать из избранного</string>
+    <string name="exercise_custom_badge">Своё</string>
+    <string name="exercise_no_images">Нет изображений</string>
+    <string name="exercise_delete_title">Удалить упражнение?</string>
+    <string name="exercise_delete_text">Упражнение пропадёт из библиотеки. Записи прошлых тренировок сохранятся.</string>
+    <string name="exercise_original_name">Оригинальное название: %1$s</string>
+
+    <string name="exercise_edit_new">Новое упражнение</string>
+    <string name="exercise_edit_title">Изменить упражнение</string>
+    <string name="exercise_edit_name">Название</string>
+    <string name="exercise_edit_category">Категория</string>
+    <string name="exercise_edit_muscles">Группы мышц</string>
+    <string name="exercise_edit_equipment">Оборудование</string>
+    <string name="exercise_edit_photo">Фото</string>
+    <string name="exercise_edit_rest_hint">Секунд (пусто — по умолчанию)</string>
+    <string name="exercise_edit_name_required">Введите название</string>
+    <string name="seconds_short">%1$d с</string>
+
+    <!-- Картинки для офлайна -->
+    <string name="settings_section_images">Изображения упражнений</string>
+    <string name="images_info">Картинки загружаются по требованию и хранятся в кэше. Можно скачать все сразу, чтобы библиотека работала без интернета.</string>
+    <string name="images_total">Всего: %1$d картинок, примерно %2$s МБ</string>
+    <string name="images_cached">Сейчас в кэше: %1$s МБ</string>
+    <string name="images_download_all">Скачать все изображения для офлайна</string>
+    <string name="images_downloading">Загрузка: %1$d из %2$d</string>
+    <string name="images_cancel">Остановить загрузку</string>
+    <string name="images_clear">Очистить кэш изображений</string>
+    <string name="images_done">Все изображения скачаны</string>
+    <string name="images_failed">Часть картинок не загрузилась (%1$d). Проверьте интернет и запустите ещё раз.</string>
+    <string name="notif_channel_downloads">Загрузки</string>
+    <string name="notif_images_title">Загрузка изображений упражнений</string>
+</resources>
