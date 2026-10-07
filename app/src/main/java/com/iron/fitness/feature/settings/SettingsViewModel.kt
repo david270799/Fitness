@@ -26,7 +26,12 @@ class SettingsViewModel @Inject constructor(
     private val repo: SettingsRepository,
     private val images: ExerciseImages,
     private val exercises: ExerciseRepository,
+    private val bodyWeight: com.iron.fitness.core.body.BodyWeightProvider,
 ) : ViewModel() {
+
+    private val _weightKg = MutableStateFlow<Double?>(null)
+    /** Вес, по которому считаются калории. */
+    val weightKg: StateFlow<Double?> = _weightKg.asStateFlow()
 
     val settings: StateFlow<AppSettings> = repo.settings
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AppSettings())
@@ -41,6 +46,7 @@ class SettingsViewModel @Inject constructor(
     val totalImages: StateFlow<Int> = _totalImages.asStateFlow()
 
     init {
+        viewModelScope.launch { _weightKg.value = bodyWeight.currentKg() }
         viewModelScope.launch {
             _totalImages.value = withContext(Dispatchers.IO) {
                 exercises.getAllOnce().filter { !it.isCustom }.sumOf { it.images.size }

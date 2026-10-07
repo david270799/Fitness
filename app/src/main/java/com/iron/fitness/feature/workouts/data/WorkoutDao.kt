@@ -175,4 +175,17 @@ interface WorkoutDao {
         """,
     )
     fun observeCompletedSetsSince(from: Long): Flow<List<SetWithDate>>
+
+    @Query("SELECT * FROM workouts WHERE endedAt IS NOT NULL ORDER BY startedAt")
+    suspend fun allFinished(): List<WorkoutEntity>
+
+    @Query(
+        """
+        SELECT s.*, w.startedAt AS startedAt, w.name AS workoutName FROM workout_sets s
+        JOIN workouts w ON w.id = s.workoutId
+        WHERE s.completed = 1 AND w.endedAt IS NOT NULL
+        ORDER BY w.startedAt, s.workoutExerciseId, s.position
+        """,
+    )
+    suspend fun allCompletedSets(): List<SetWithDate>
 }

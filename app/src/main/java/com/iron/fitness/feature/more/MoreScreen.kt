@@ -30,6 +30,7 @@ private data class MoreItem(
 private val items = listOf(
     MoreItem(Routes.REMINDERS, R.string.more_reminders, R.string.more_reminders_sub, IronIcons.Pill),
     MoreItem(Routes.library(), R.string.more_library, R.string.more_library_sub, IronIcons.List),
+    MoreItem(Routes.STATS, R.string.more_stats, R.string.more_stats_sub, IronIcons.ChartBar),
     MoreItem(Routes.HISTORY, R.string.history_title, R.string.more_history_sub, IronIcons.History),
     MoreItem(Routes.TOOLS, R.string.more_tools, R.string.more_tools_sub, IronIcons.Calculator),
     MoreItem(Routes.SETTINGS, R.string.more_settings, R.string.more_settings_sub, IronIcons.Settings),

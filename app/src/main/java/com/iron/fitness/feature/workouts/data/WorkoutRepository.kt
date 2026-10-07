@@ -64,6 +64,9 @@ class WorkoutRepository @Inject constructor(
     fun observeRoutineLastUse(): Flow<List<RoutineLastUse>> = dao.observeRoutineLastUse()
     fun observeFinishedSince(from: Long): Flow<List<WorkoutEntity>> = dao.observeFinishedSince(from)
     suspend fun getActiveStrength(): WorkoutEntity? = dao.getActiveStrength()
+    fun observeCompletedSetsSince(from: Long): Flow<List<SetWithDate>> = dao.observeCompletedSetsSince(from)
+    suspend fun allFinished(): List<WorkoutEntity> = dao.allFinished()
+    suspend fun allCompletedSets(): List<SetWithDate> = dao.allCompletedSets()
     suspend fun getRoutine(id: Long): RoutineWithExercises? = dao.getRoutine(id)
     fun observeCompletedSetsForExercise(exerciseId: String): Flow<List<SetWithDate>> =
         dao.observeCompletedSetsForExercise(exerciseId)

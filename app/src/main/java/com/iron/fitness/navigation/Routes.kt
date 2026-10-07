@@ -41,6 +41,7 @@ object Routes {
     const val STRETCH_EDIT_PATTERN = "stretch_edit?id={id}"
     const val CHALLENGE_PATTERN = "challenge/{id}"
     const val REMINDERS = "reminders"
+    const val STATS = "stats"
     const val PERMISSIONS = "permissions"
     const val REMINDER_DETAIL_PATTERN = "reminder/{id}"
     const val REMINDER_EDIT_PATTERN = "reminder_edit?id={id}"

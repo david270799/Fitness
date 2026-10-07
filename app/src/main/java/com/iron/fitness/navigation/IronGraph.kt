@@ -33,6 +33,7 @@ import com.iron.fitness.feature.workouts.routine.RoutineEditorScreen
 import com.iron.fitness.feature.workouts.session.SessionScreen
 import com.iron.fitness.feature.workouts.summary.WorkoutSummaryScreen
 import com.iron.fitness.feature.workouts.tools.ToolsScreen
+import com.iron.fitness.feature.stats.StatsScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -157,6 +158,7 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         )
     }
     composable(Routes.TOOLS) { ToolsScreen(onBack = back) }
+    composable(Routes.STATS) { StatsScreen(onBack = back) }
 
     // ---------- Кардио и интервалы ----------
     composable(Routes.INTERVAL_RUN) { IntervalRunScreen(onBack = back) }

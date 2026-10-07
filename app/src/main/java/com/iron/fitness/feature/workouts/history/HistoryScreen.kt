@@ -37,10 +37,13 @@ import kotlinx.coroutines.flow.stateIn
 import java.time.YearMonth
 import javax.inject.Inject
 
+enum class HistoryRange(val days: Long?) { ALL(null), DAYS_30(30), DAYS_90(90), YEAR(365) }
+
 data class HistoryState(
     val loading: Boolean = true,
     val query: String = "",
     val type: WorkoutType? = null,
+    val range: HistoryRange = HistoryRange.ALL,
     /** Месяц → тренировки, от новых к старым. */
     val groups: List<Pair<YearMonth, List<WorkoutSummaryRow>>> = emptyList(),
 )
@@ -49,24 +52,29 @@ data class HistoryState(
 class HistoryViewModel @Inject constructor(repo: WorkoutRepository) : ViewModel() {
     private val query = MutableStateFlow("")
     private val type = MutableStateFlow<WorkoutType?>(null)
+    private val range = MutableStateFlow(HistoryRange.ALL)
     val queryValue: StateFlow<String> = query.asStateFlow()
 
-    val state: StateFlow<HistoryState> = combine(repo.observeHistory(), query, type) { rows, q, t ->
+    val state: StateFlow<HistoryState> = combine(repo.observeHistory(), query, type, range) { rows, q, t, rg ->
         val needle = q.trim().lowercase()
+        val from = rg.days?.let { System.currentTimeMillis() - it * 24 * 60 * 60 * 1000 } ?: Long.MIN_VALUE
         val filtered = rows.filter { r ->
-            (t == null || r.workout.type == t) &&
+            r.workout.startedAt >= from &&
+                (t == null || r.workout.type == t) &&
                 (needle.isEmpty() || r.workout.name.lowercase().contains(needle) || r.workout.note?.lowercase()?.contains(needle) == true)
         }
         HistoryState(
             loading = false,
             query = q,
             type = t,
+            range = rg,
             groups = filtered.groupBy { YearMonth.from(Fmt.toLocalDate(it.workout.startedAt)) }.toList(),
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HistoryState())
 
     fun setQuery(q: String) { query.value = q }
     fun setType(t: WorkoutType?) { type.value = t }
+    fun setRange(r: HistoryRange) { range.value = r }
 }
 
 @Composable
@@ -91,6 +99,22 @@ fun HistoryScreen(
                 selected = state.type,
                 label = { workoutTypeLabel(it) },
                 onSelect = viewModel::setType,
+                modifier = Modifier.padding(top = 8.dp),
+            )
+            ChipRow(
+                items = HistoryRange.entries,
+                selected = state.range,
+                label = {
+                    stringResource(
+                        when (it) {
+                            HistoryRange.ALL -> R.string.history_range_all
+                            HistoryRange.DAYS_30 -> R.string.history_range_30
+                            HistoryRange.DAYS_90 -> R.string.history_range_90
+                            HistoryRange.YEAR -> R.string.history_range_year
+                        },
+                    )
+                },
+                onSelect = viewModel::setRange,
                 modifier = Modifier.padding(vertical = 8.dp),
             )
             if (!state.loading && state.groups.isEmpty()) {

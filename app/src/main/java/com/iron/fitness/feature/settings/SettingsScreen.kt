@@ -76,6 +76,7 @@ fun SettingsScreen(
             AppearanceSection(settings, viewModel)
             WorkoutSection(settings, viewModel)
             ReminderSection(settings, viewModel, navigate)
+            CaloriesSection(viewModel)
             ImagesSection(viewModel)
             Spacer(Modifier.height(24.dp))
         }
@@ -284,6 +285,23 @@ private fun ReminderSection(settings: AppSettings, viewModel: SettingsViewModel,
             onClick = { navigate(Routes.PERMISSIONS) },
             trailing = { IronIcon(IronIcons.ChevronRight, null, tint = Iron.colors.textSecondary) },
         )
+    }
+}
+
+@Composable
+private fun CaloriesSection(viewModel: SettingsViewModel) {
+    val weight by viewModel.weightKg.collectAsStateWithLifecycle()
+    SectionTitle(stringResource(R.string.settings_section_calories))
+    IronCard {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(stringResource(R.string.calories_formula), style = Iron.numbers.small)
+            Text(stringResource(R.string.calories_explain), style = MaterialTheme.typography.bodyMedium, color = Iron.colors.textSecondary)
+            Text(
+                stringResource(R.string.calories_weight_used, weight?.let { Fmt.num(it, 1) } ?: "—"),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Text(stringResource(R.string.calories_met_table), style = MaterialTheme.typography.bodySmall, color = Iron.colors.textSecondary)
+        }
     }
 }
 

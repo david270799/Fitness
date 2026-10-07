@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stats_title">Статистика</string>
+    <string name="stats_week">Неделя</string>
+    <string name="stats_month">Месяц</string>
+    <string name="stats_quarter">3 мес.</string>
+    <string name="stats_year">Год</string>
+    <string name="stats_workouts">Тренировок</string>
+    <string name="stats_distance">Дистанция</string>
+    <string name="stats_chart_workouts">Тренировки</string>
+    <string name="stats_chart_volume">Объём силовых, кг</string>
+    <string name="stats_chart_kcal">Калории, ≈ ккал</string>
+    <string name="stats_by_type">По видам</string>
+    <string name="stats_muscles">Рабочие подходы по мышцам</string>
+    <string name="stats_muscles_hint">Сильный перекос в одну сторону — повод добавить упражнения на отстающие группы.</string>
+    <string name="stats_top_exercises">Частые упражнения</string>
+    <string name="stats_sets_volume">%1$d подх. · %2$s кг</string>
+
+    <string name="csv_share">Экспорт CSV</string>
+    <string name="csv_subject">IRON: журнал тренировок</string>
+    <string name="csv_hint">Экспорт CSV (значок «Поделиться» вверху) выгружает весь журнал в два файла — тренировки и подходы. Они открываются в Excel и Google Таблицах.</string>
+    <string name="csv_workouts_header">Дата;Время;Тип;Название;Длительность, мин;Объём, кг;Ккал (≈);Дистанция, км;Вид кардио;Заметка</string>
+    <string name="csv_sets_header">Дата;Тренировка;Упражнение;Подход;Тип подхода;Вес, кг;Повторы;Секунды;Рекорд</string>
+
+    <string name="history_range_all">Всё время</string>
+    <string name="history_range_30">30 дней</string>
+    <string name="history_range_90">90 дней</string>
+    <string name="history_range_year">Год</string>
+
+    <string name="settings_section_calories">Калории</string>
+    <string name="calories_formula">ккал ≈ MET × вес (кг) × время (ч)</string>
+    <string name="calories_explain">MET — затраты энергии относительно покоя (по Compendium of Physical Activities). Это оценка, поэтому везде стоит «≈»: реальный расход зависит от темпа, техники и обмена веществ.</string>
+    <string name="calories_weight_used">Вес для расчёта: %1$s кг (последний замер в разделе «Тело», иначе 75 кг)</string>
+    <string name="calories_met_table">Силовые — 3,5–6 в зависимости от плотности (подходов за 10 минут). Растяжка — 2,3. Интервалы: работа — 6/8/10 по выбранной интенсивности, отдых — 2,5. Кардио — по виду и интенсивности: бег 7–11,5, ходьба 2,8–5, велосипед 5,8–10, гребля 4,8–8,5.</string>
+</resources>
