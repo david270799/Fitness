@@ -41,7 +41,8 @@ class MigrationSqlTest {
         val fields = entity(database(3), "workouts")["fields"]!!.jsonArray.map { it.jsonObject }
         val f = fields.first { it["columnName"]!!.jsonPrimitive.content == "intensity" }
         assertEquals("TEXT", f["affinity"]!!.jsonPrimitive.content)
-        assertEquals(false, f["notNull"]!!.jsonPrimitive.boolean)
+        // Room не записывает notNull = false (значение по умолчанию).
+        assertEquals(false, f["notNull"]?.jsonPrimitive?.boolean ?: false)
         assertEquals("ALTER TABLE `workouts` ADD COLUMN `intensity` TEXT", IronMigrations.ADD_WORKOUT_INTENSITY)
     }
 
