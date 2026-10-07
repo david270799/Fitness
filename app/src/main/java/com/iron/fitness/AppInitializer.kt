@@ -4,6 +4,7 @@ import com.iron.fitness.core.alarms.AlarmRescheduler
 import com.iron.fitness.core.backup.BackupManager
 import com.iron.fitness.di.ApplicationScope
 import com.iron.fitness.feature.exercises.data.ExerciseRepository
+import com.iron.fitness.feature.widgets.WidgetRefresher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,6 +17,7 @@ class AppInitializer @Inject constructor(
     private val exercises: ExerciseRepository,
     private val alarms: AlarmRescheduler,
     private val backup: BackupManager,
+    private val widgets: WidgetRefresher,
 ) {
     fun start() {
         scope.launch {
@@ -25,5 +27,7 @@ class AppInitializer @Inject constructor(
         }
         // Будильники могли пропасть (принудительная остановка, обновление) — ставим заново.
         scope.launch { alarms.rescheduleAll() }
+        // Виджеты следят за данными, пока жив процесс.
+        widgets.start()
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_counter_name">IRON · Челлендж</string>
+    <string name="widget_counter_desc">Счётчик дневного челленджа с быстрыми кнопками</string>
+    <string name="widget_today_name">IRON · Сегодня</string>
+    <string name="widget_today_desc">Тренировки, челленджи и приёмы за сегодня</string>
+    <string name="widget_timer_name">IRON · Отдых</string>
+    <string name="widget_timer_desc">Быстрый старт таймера отдыха</string>
+    <string name="widget_no_challenges">Нет активных челленджей. Создайте их в разделе «Дневное».</string>
+    <string name="widget_streak">серия %1$d</string>
+    <string name="widget_more">+…</string>
+    <string name="widget_today_title">Сегодня</string>
+    <string name="widget_no_workouts">Тренировок пока не было</string>
+    <string name="widget_workouts">Тренировок: %1$d · %2$d мин · %3$d ккал</string>
+    <string name="widget_dose_next">%1$s · %2$s</string>
+    <string name="widget_dose_taken">Принял</string>
+    <string name="widget_doses_done">Все приёмы на сегодня отмечены</string>
+    <string name="widget_rest_title">Отдых</string>
+</resources>
