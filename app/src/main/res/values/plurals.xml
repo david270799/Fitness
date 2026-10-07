@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="sets">
+        <item quantity="one">%d подход</item>
+        <item quantity="few">%d подхода</item>
+        <item quantity="many">%d подходов</item>
+        <item quantity="other">%d подхода</item>
+    </plurals>
+    <plurals name="reps">
+        <item quantity="one">%d повтор</item>
+        <item quantity="few">%d повтора</item>
+        <item quantity="many">%d повторов</item>
+        <item quantity="other">%d повтора</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">%d день</item>
+        <item quantity="few">%d дня</item>
+        <item quantity="many">%d дней</item>
+        <item quantity="other">%d дня</item>
+    </plurals>
+    <plurals name="days_in_row">
+        <item quantity="one">%d день подряд</item>
+        <item quantity="few">%d дня подряд</item>
+        <item quantity="many">%d дней подряд</item>
+        <item quantity="other">%d дня подряд</item>
+    </plurals>
+    <plurals name="exercises">
+        <item quantity="one">%d упражнение</item>
+        <item quantity="few">%d упражнения</item>
+        <item quantity="many">%d упражнений</item>
+        <item quantity="other">%d упражнения</item>
+    </plurals>
+    <plurals name="workouts">
+        <item quantity="one">%d тренировка</item>
+        <item quantity="few">%d тренировки</item>
+        <item quantity="many">%d тренировок</item>
+        <item quantity="other">%d тренировки</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">%d минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минуты</item>
+    </plurals>
+    <plurals name="seconds">
+        <item quantity="one">%d секунда</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунды</item>
+    </plurals>
+    <plurals name="rounds">
+        <item quantity="one">%d круг</item>
+        <item quantity="few">%d круга</item>
+        <item quantity="many">%d кругов</item>
+        <item quantity="other">%d круга</item>
+    </plurals>
+    <plurals name="times">
+        <item quantity="one">%d раз</item>
+        <item quantity="few">%d раза</item>
+        <item quantity="many">%d раз</item>
+        <item quantity="other">%d раза</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">%d неделя</item>
+        <item quantity="few">%d недели</item>
+        <item quantity="many">%d недель</item>
+        <item quantity="other">%d недели</item>
+    </plurals>
+    <plurals name="records">
+        <item quantity="one">%d рекорд</item>
+        <item quantity="few">%d рекорда</item>
+        <item quantity="many">%d рекордов</item>
+        <item quantity="other">%d рекорда</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="one">%d фото</item>
+        <item quantity="few">%d фото</item>
+        <item quantity="many">%d фото</item>
+        <item quantity="other">%d фото</item>
+    </plurals>
+    <plurals name="blocks">
+        <item quantity="one">%d блок</item>
+        <item quantity="few">%d блока</item>
+        <item quantity="many">%d блоков</item>
+        <item quantity="other">%d блока</item>
+    </plurals>
+    <plurals name="images">
+        <item quantity="one">%d изображение</item>
+        <item quantity="few">%d изображения</item>
+        <item quantity="many">%d изображений</item>
+        <item quantity="other">%d изображения</item>
+    </plurals>
+</resources>

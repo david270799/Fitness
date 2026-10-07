@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Настройки</string>
+    <string name="settings_section_appearance">Оформление</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_mode">Режим темы</string>
+    <string name="settings_theme_mode_fixed">Всегда выбранная</string>
+    <string name="settings_theme_mode_fixed_sub">Используется выбранная тема независимо от системы</string>
+    <string name="settings_theme_mode_system">Системная</string>
+    <string name="settings_theme_mode_system_sub">Днём — «Светлая», в тёмном режиме системы — выбранная тёмная тема</string>
+
+    <string name="theme_midnight">Полночь</string>
+    <string name="theme_graphite">Графит</string>
+    <string name="theme_steel">Сталь</string>
+    <string name="theme_blood">Кровь</string>
+    <string name="theme_amber">Янтарь</string>
+    <string name="theme_light">Светлая</string>
+</resources>

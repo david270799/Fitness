@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IRON</string>
+
+    <!-- Нижняя панель -->
+    <string name="nav_today">Сегодня</string>
+    <string name="nav_workouts">Тренировки</string>
+    <string name="nav_daily">Дневное</string>
+    <string name="nav_body">Тело</string>
+    <string name="nav_more">Ещё</string>
+    <string name="nav_assistant">Ассистент</string>
+
+    <!-- Общие действия -->
+    <string name="action_back">Назад</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_edit">Изменить</string>
+    <string name="action_copy">Копировать</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_done">Готово</string>
+    <string name="action_close">Закрыть</string>
+    <string name="action_ok">ОК</string>
+    <string name="action_yes">Да</string>
+    <string name="action_no">Нет</string>
+    <string name="action_search">Поиск</string>
+    <string name="action_filter">Фильтр</string>
+    <string name="action_clear">Очистить</string>
+    <string name="action_more">Ещё</string>
+    <string name="action_continue">Продолжить</string>
+    <string name="action_start">Начать</string>
+    <string name="action_skip">Пропустить</string>
+    <string name="action_retry">Повторить</string>
+    <string name="action_open">Открыть</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_confirm">Подтвердить</string>
+    <string name="action_rename">Переименовать</string>
+    <string name="action_select">Выбрать</string>
+    <string name="action_camera">Камера</string>
+    <string name="action_gallery">Галерея</string>
+    <string name="action_remove_photo">Убрать фото</string>
+
+    <string name="confirm_delete_title">Удалить?</string>
+    <string name="confirm_delete_text">Это действие нельзя отменить.</string>
+    <string name="empty_list">Пока пусто</string>
+    <string name="loading">Загрузка…</string>
+    <string name="error_generic">Что-то пошло не так</string>
+    <string name="not_set">не задано</string>
+    <string name="dash">—</string>
+
+    <!-- Единицы -->
+    <string name="unit_kg">кг</string>
+    <string name="unit_cm">см</string>
+    <string name="unit_kcal">ккал</string>
+    <string name="unit_km">км</string>
+    <string name="unit_sec">с</string>
+    <string name="unit_min">мин</string>
+    <string name="unit_percent">%</string>
+    <string name="unit_reps_short">повт.</string>
+    <string name="approx_kcal">≈ %1$d ккал</string>
+    <string name="value_kg">%1$s кг</string>
+    <string name="value_cm">%1$s см</string>
+    <string name="value_percent">%1$s %%</string>
+
+    <!-- Экраны-заглушки -->
+    <string name="today_title">Сегодня</string>
+    <string name="workouts_title">Тренировки</string>
+    <string name="daily_title">Дневное</string>
+    <string name="body_title">Тело</string>
+    <string name="more_title">Ещё</string>
+    <string name="coming_soon">Раздел появится на следующих этапах.</string>
+
+    <!-- Ещё -->
+    <string name="more_reminders">Напоминания</string>
+    <string name="more_reminders_sub">Витамины, лекарства, вода</string>
+    <string name="more_settings">Настройки</string>
+    <string name="more_settings_sub">Темы, таймеры, ассистент</string>
+    <string name="more_backup">Бэкап</string>
+    <string name="more_backup_sub">Экспорт, импорт, Google Диск</string>
+    <string name="more_about">О приложении</string>
+    <string name="more_about_sub">Версия и лицензии</string>
+    <string name="more_library">Библиотека упражнений</string>
+    <string name="more_library_sub">Поиск, фильтры, свои упражнения</string>
+    <string name="more_stats">Статистика</string>
+    <string name="more_stats_sub">Графики, журнал, экспорт CSV</string>
+    <string name="more_tools">Калькуляторы</string>
+    <string name="more_tools_sub">Блины на штангу, 1ПМ</string>
+
+    <!-- О приложении -->
+    <string name="about_title">О приложении</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_tagline">Личный дневник тренировок. Без рекламы, аккаунтов и аналитики. Данные хранятся только на телефоне.</string>
+    <string name="about_privacy_title">Что покидает устройство</string>
+    <string name="about_privacy_text">Только запросы к ассистенту Gemini (по вашему действию), бэкап на Google Диск (если включён) и загрузка картинок упражнений.</string>
+    <string name="about_licenses_title">Лицензии</string>
+    <string name="about_license_exercises">Free Exercise DB (yuhonas/free-exercise-db) — Unlicense, общественное достояние.</string>
+    <string name="about_license_icons">Иконки Lucide — лицензия ISC.</string>
+    <string name="about_license_fonts">Шрифты Oswald, Inter, JetBrains Mono — SIL Open Font License 1.1.</string>
+    <string name="about_medical">Приложение не является медицинским изделием. Оценки калорий, анализ состава тела и советы ассистента — не медицинские рекомендации.</string>
+</resources>

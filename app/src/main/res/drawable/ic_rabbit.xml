@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lucide Icons (ISC), сконвертировано tools/lucide_to_vector.py -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M13 16 a3 3 0 0 1 2.24 5"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M18 12 h.01"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M18 21 h-8 a4 4 0 0 1 -4 -4 7 7 0 0 1 7 -7 h.2 L9.6 6.4 a1 1 0 1 1 2.8 -2.8 L15.8 7 h.2 c3.3 0 6 2.7 6 6 v1 a2 2 0 0 1 -2 2 h-1 a3 3 0 0 0 -3 3"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M20 8.54 V4 a2 2 0 1 0 -4 0 v3"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M7.612 12.524 a3 3 0 1 0 -1.6 4.3"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>
