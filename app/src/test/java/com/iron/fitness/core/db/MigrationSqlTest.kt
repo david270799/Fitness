@@ -28,9 +28,12 @@ class MigrationSqlTest {
     private fun createSql(db: JsonObject, table: String): String =
         entity(db, table)["createSql"]!!.jsonPrimitive.content.replace("\${TABLE_NAME}", table)
 
+    /** Схема текущей версии: таблицы, созданные миграциями, с тех пор не менялись. */
+    private fun current() = database(IronDatabase.VERSION)
+
     @Test
     fun intervalProgramsTableMatchesRoom() {
-        val db = database(3)
+        val db = current()
         assertEquals(createSql(db, "interval_programs"), IronMigrations.CREATE_INTERVAL_PROGRAMS)
         val indices = entity(db, "interval_programs")["indices"]?.jsonArray
         assertTrue(indices == null || indices.isEmpty())
@@ -38,12 +41,18 @@ class MigrationSqlTest {
 
     @Test
     fun workoutsIntensityColumnMatchesRoom() {
-        val fields = entity(database(3), "workouts")["fields"]!!.jsonArray.map { it.jsonObject }
+        val fields = entity(current(), "workouts")["fields"]!!.jsonArray.map { it.jsonObject }
         val f = fields.first { it["columnName"]!!.jsonPrimitive.content == "intensity" }
         assertEquals("TEXT", f["affinity"]!!.jsonPrimitive.content)
         // Room не записывает notNull = false (значение по умолчанию).
         assertEquals(false, f["notNull"]?.jsonPrimitive?.boolean ?: false)
         assertEquals("ALTER TABLE `workouts` ADD COLUMN `intensity` TEXT", IronMigrations.ADD_WORKOUT_INTENSITY)
+    }
+
+    @Test
+    fun stretchRoutinesTableMatchesRoom() {
+        val db = current()
+        assertEquals(createSql(db, "stretch_routines"), IronMigrations.CREATE_STRETCH_ROUTINES)
     }
 
     @Test

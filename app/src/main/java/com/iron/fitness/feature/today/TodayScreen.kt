@@ -32,7 +32,18 @@ import com.iron.fitness.core.ui.components.SecondaryButton
 import com.iron.fitness.core.ui.components.SectionTitle
 import com.iron.fitness.core.ui.theme.Iron
 import com.iron.fitness.core.util.Fmt
+import com.iron.fitness.core.domain.StretchPhase
+import com.iron.fitness.core.ui.components.IronChip
+import com.iron.fitness.core.ui.components.IronIcon
+import com.iron.fitness.feature.stretching.ui.MarkStretchSheet
+import com.iron.fitness.feature.stretching.ui.stretchPhaseLabel
 import com.iron.fitness.feature.workouts.ActiveWorkoutBanner
+import com.iron.fitness.feature.workouts.data.WorkoutEntity
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import com.iron.fitness.navigation.Routes
 
 @Composable
@@ -42,6 +53,15 @@ fun TodayScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val defaultName = stringResource(R.string.workouts_default_name)
+    val stretchName = stringResource(R.string.stretch_default_name)
+    var markSheet by remember { mutableStateOf(false) }
+    if (markSheet) {
+        MarkStretchSheet(
+            onSave = { phase, minutes -> viewModel.markStretch(stretchName, phase, minutes); markSheet = false },
+            onDismiss = { markSheet = false },
+            initialPhase = if (state.strengthTodayId != null) StretchPhase.AFTER else StretchPhase.ANY,
+        )
+    }
     Column(
         Modifier
             .fillMaxSize()
@@ -91,6 +111,15 @@ fun TodayScreen(
             )
         }
 
+        StretchTodayCard(
+            done = state.stretchToday,
+            onStart = { phase ->
+                // Если уже идёт другая программа — просто открываем её таймер.
+                viewModel.startStretch(phase) { navigate(Routes.INTERVAL_RUN) }
+            },
+            onMark = { markSheet = true },
+        )
+
         SectionTitle(stringResource(R.string.today_activity))
         IronCard(modifier = Modifier.fillMaxWidth()) {
             ActivityHeatmap(levels = state.heatmap, weeks = TodayViewModel.HEATMAP_WEEKS, today = state.today)
@@ -139,6 +168,40 @@ private fun PlanCard(
                 Text(stringResource(R.string.today_no_plan), style = MaterialTheme.typography.bodyMedium, color = Iron.colors.textSecondary)
                 PrimaryButton(stringResource(R.string.workouts_start_empty), onStartEmpty, icon = IronIcons.Play, modifier = Modifier.fillMaxWidth())
                 SecondaryButton(stringResource(R.string.workouts_new_routine), { navigate(Routes.routineEdit()) }, icon = IronIcons.Add, modifier = Modifier.fillMaxWidth())
+            }
+        }
+    }
+}
+
+@Composable
+private fun StretchTodayCard(done: List<WorkoutEntity>, onStart: (StretchPhase) -> Unit, onMark: () -> Unit) {
+    IronCard(modifier = Modifier.fillMaxWidth(), borderColor = if (done.isNotEmpty()) Iron.colors.success else Iron.colors.border) {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IronIcon(
+                    if (done.isNotEmpty()) IronIcons.CircleCheck else IronIcons.Stretch,
+                    null,
+                    tint = if (done.isNotEmpty()) Iron.colors.success else Iron.colors.textSecondary,
+                )
+                Spacer(Modifier.width(10.dp))
+                Text(
+                    stringResource(if (done.isNotEmpty()) R.string.stretch_done_today else R.string.stretch_title).uppercase(),
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+            done.forEach { w ->
+                val phase = w.stretchPhase?.let { runCatching { StretchPhase.valueOf(it) }.getOrNull() } ?: StretchPhase.ANY
+                Text(
+                    stretchPhaseLabel(phase) + " · " + w.name + " · " + Fmt.durationWords(w.durationSec),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Iron.colors.textSecondary,
+                )
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                IronChip(stringResource(R.string.stretch_phase_before), selected = false, icon = IronIcons.Play, onClick = { onStart(StretchPhase.BEFORE) })
+                IronChip(stringResource(R.string.stretch_phase_after), selected = false, icon = IronIcons.Play, onClick = { onStart(StretchPhase.AFTER) })
+                IronChip(stringResource(R.string.stretch_mark_short), selected = false, icon = IronIcons.Check, onClick = onMark)
             }
         }
     }

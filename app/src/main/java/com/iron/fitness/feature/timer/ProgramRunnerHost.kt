@@ -38,6 +38,13 @@ fun phaseTypeName(res: Resources, type: BlockType): String = res.getString(
     },
 )
 
+/** Подпись типа с учётом вида программы: в растяжке — «Удержание» и «Переход». */
+fun phaseKindLabel(res: Resources, kind: RunKind, type: BlockType): String = when {
+    kind == RunKind.STRETCHING && type == BlockType.WORK -> res.getString(R.string.run_hold)
+    kind == RunKind.STRETCHING && type == BlockType.REST -> res.getString(R.string.run_transition)
+    else -> phaseTypeName(res, type)
+}
+
 /** Как назвать отрезок голосом и в уведомлении: подпись или тип. */
 fun phaseName(res: Resources, phase: Phase): String = phase.label?.takeIf { it.isNotBlank() } ?: phaseTypeName(res, phase.type)
 
@@ -65,6 +72,8 @@ class ProgramRunnerHost @Inject constructor(
         val now = SystemClock.elapsedRealtime()
         val title = if (s.kind == RunKind.CARDIO) {
             s.title.uppercase()
+        } else if (s.kind == RunKind.STRETCHING) {
+            phaseName(r, phase).uppercase()
         } else {
             val type = phaseTypeName(r, phase.type).uppercase()
             if (phase.label.isNullOrBlank()) type else "$type · ${phase.label}"
@@ -73,7 +82,7 @@ class ProgramRunnerHost @Inject constructor(
             if (s.paused) add(r.getString(R.string.run_paused))
             if (phase.rounds > 0) add(r.getString(R.string.run_round, phase.round, phase.rounds))
             s.next?.let { add(r.getString(R.string.run_next, phaseName(r, it))) }
-            if (s.kind == RunKind.INTERVAL && s.next == null) add(r.getString(R.string.run_last_block))
+            if (s.kind != RunKind.CARDIO && s.next == null) add(r.getString(R.string.run_last_block))
         }
         val remaining = s.remainingMs(now)
         val builder = NotificationCompat.Builder(service, NotificationChannels.TIMER)

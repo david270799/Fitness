@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stretch_title">Растяжка</string>
+    <string name="stretch_default_name">Растяжка</string>
+    <string name="stretch_phase_before">Перед</string>
+    <string name="stretch_phase_after">После</string>
+    <string name="stretch_phase_any">Отдельно</string>
+    <string name="stretch_mark_done">Растяжка выполнена</string>
+    <string name="stretch_mark_short">Отметить</string>
+    <string name="stretch_mark_hint">Запись попадёт в журнал и свяжется с силовой тренировкой этого дня (перед — с текущей, после — с последней).</string>
+    <string name="stretch_done_today">Растяжка сегодня выполнена</string>
+    <string name="stretch_new">Новый комплекс</string>
+    <string name="stretch_edit">Комплекс растяжки</string>
+    <string name="stretch_mine">Мои комплексы</string>
+    <string name="stretch_mine_empty">Своих комплексов пока нет — соберите из упражнений библиотеки или скопируйте шаблон.</string>
+    <string name="stretch_recent">История растяжки</string>
+    <string name="stretch_delete_title">Удалить комплекс?</string>
+    <string name="stretch_count">позиций: %1$d</string>
+    <string name="stretch_name_hint">Например: Заминка после ног</string>
+    <string name="stretch_positions">Позиции</string>
+    <string name="stretch_empty">Добавьте упражнения на растяжку из библиотеки.</string>
+    <string name="stretch_hold">Удержание</string>
+    <string name="stretch_both_sides">Обе стороны</string>
+    <string name="stretch_left">левая сторона</string>
+    <string name="stretch_right">правая сторона</string>
+    <string name="stretch_switch">Смена стороны</string>
+    <string name="stretch_transition">Переход</string>
+    <string name="minutes_short">%1$d мин</string>
+    <string name="summary_stretch_after">Растяжка после тренировки</string>
+    <string name="run_hold">Удержание</string>
+    <string name="run_transition">Переход</string>
+
+    <string name="stpl_before">Разминка перед силовой</string>
+    <string name="stpl_after_upper">Заминка: верх тела</string>
+    <string name="stpl_after_lower">Заминка: низ тела</string>
+    <string name="stpl_morning">Утренняя растяжка</string>
+    <string name="stpl_runner">Растяжка после бега</string>
+</resources>

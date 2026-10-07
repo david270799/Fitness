@@ -75,7 +75,7 @@ import com.iron.fitness.feature.exercises.data.ExerciseRepository
 import com.iron.fitness.feature.exercises.data.thumbnailModel
 import com.iron.fitness.feature.exercises.ui.ExerciseThumb
 import com.iron.fitness.feature.timer.phaseName
-import com.iron.fitness.feature.timer.phaseTypeName
+import com.iron.fitness.feature.timer.phaseKindLabel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -265,7 +265,7 @@ private fun RunningPanel(
                 Text(stringResource(R.string.run_round, phase.round, phase.rounds).uppercase(), style = Iron.numbers.tiny, color = Iron.colors.textSecondary)
             }
         }
-        if (s.kind == RunKind.INTERVAL) {
+        if (s.kind != RunKind.CARDIO) {
             val planned = s.plannedMs.coerceAtLeast(1)
             val spent = s.totalSpentMs(now)
             FlatProgressBar((spent.toFloat() / planned).coerceIn(0f, 1f), height = 6.dp)
@@ -281,7 +281,7 @@ private fun RunningPanel(
                 .padding(horizontal = 14.dp, vertical = 4.dp),
         ) {
             Text(
-                (if (s.paused) stringResource(R.string.run_paused) else phaseTypeName(res, phase.type)).uppercase(),
+                (if (s.paused) stringResource(R.string.run_paused) else phaseKindLabel(res, s.kind, phase.type)).uppercase(),
                 style = MaterialTheme.typography.titleMedium,
                 color = if (phase.type == BlockType.WORK) Iron.colors.onAccent else Iron.colors.background,
             )
@@ -315,6 +315,15 @@ private fun RunningPanel(
                 size = 160.dp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
             )
+            if (s.kind == RunKind.STRETCHING && ex.instructions.isNotEmpty()) {
+                Text(
+                    ex.instructions.take(2).joinToString(" "),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Iron.colors.textSecondary,
+                    maxLines = 4,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
         val next = s.next
         if (next != null) {
@@ -330,7 +339,7 @@ private fun RunningPanel(
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             BigButton(IronIcons.Stop, stringResource(R.string.run_stop), onStop, Modifier.weight(1f), primary = false)
             BigButton(if (s.paused) IronIcons.Play else IronIcons.Pause, stringResource(if (s.paused) R.string.run_resume else R.string.run_pause), onPause, Modifier.weight(1f), primary = true)
-            if (s.kind == RunKind.INTERVAL) {
+            if (s.kind != RunKind.CARDIO) {
                 BigButton(IronIcons.SkipNext, stringResource(R.string.run_skip), onSkip, Modifier.weight(1f), primary = false)
             } else {
                 BigButton(IronIcons.Flag, stringResource(R.string.run_finish), { onStop() }, Modifier.weight(1f), primary = false)
@@ -400,7 +409,7 @@ private fun FinishedPanel(
                 Text(stringResource(R.string.summary_duration).uppercase(), style = MaterialTheme.typography.labelSmall, color = Iron.colors.textSecondary)
                 Text(Fmt.duration(s.spentMs.values.sum() / 1000), style = Iron.numbers.medium)
             }
-            if (s.kind == RunKind.INTERVAL) {
+            if (s.kind != RunKind.CARDIO) {
                 IronCard(modifier = Modifier.weight(1f)) {
                     Text(stringResource(R.string.summary_calories).uppercase(), style = MaterialTheme.typography.labelSmall, color = Iron.colors.textSecondary)
                     Text("≈ " + kcal.toInt(), style = Iron.numbers.medium)

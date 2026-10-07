@@ -47,6 +47,7 @@ import com.iron.fitness.core.ui.components.Segmented
 import com.iron.fitness.core.ui.theme.Iron
 import com.iron.fitness.core.util.Fmt
 import com.iron.fitness.feature.cardio.ui.CardioTab
+import com.iron.fitness.feature.stretching.ui.StretchingTab
 import com.iron.fitness.feature.workouts.data.WorkoutEntity
 import com.iron.fitness.feature.workouts.history.WorkoutRow
 import com.iron.fitness.navigation.Routes
@@ -87,7 +88,7 @@ fun WorkoutsScreen(
             when (tab) {
                 WorkoutsTab.STRENGTH -> StrengthTab(state, viewModel, navigate)
                 WorkoutsTab.CARDIO -> CardioTab(navigate)
-                WorkoutsTab.STRETCHING -> EmptyState(stringResource(R.string.workouts_stretching_soon), icon = IronIcons.Stretch)
+                WorkoutsTab.STRETCHING -> StretchingTab(navigate)
             }
         }
     }

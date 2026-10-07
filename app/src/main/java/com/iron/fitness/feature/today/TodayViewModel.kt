@@ -2,7 +2,12 @@ package com.iron.fitness.feature.today
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.iron.fitness.core.domain.StretchPhase
 import com.iron.fitness.core.domain.Streaks
+import com.iron.fitness.feature.stretching.data.StretchLauncher
+import com.iron.fitness.feature.stretching.data.StretchRepository
+import com.iron.fitness.feature.stretching.data.StretchTemplates
+import com.iron.fitness.feature.workouts.data.WorkoutType
 import com.iron.fitness.core.util.Fmt
 import com.iron.fitness.feature.workouts.data.RoutineEntity
 import com.iron.fitness.feature.workouts.data.WorkoutEntity
@@ -29,11 +34,17 @@ data class TodayState(
     val weekStreak: Int = 0,
     val last: WorkoutEntity? = null,
     val heatmap: Map<LocalDate, Int> = emptyMap(),
+    /** Растяжка за сегодня. */
+    val stretchToday: List<WorkoutEntity> = emptyList(),
+    /** Последняя силовая сегодня — для подбора заминки. */
+    val strengthTodayId: Long? = null,
 )
 
 @HiltViewModel
 class TodayViewModel @Inject constructor(
     private val repo: WorkoutRepository,
+    private val stretchRepo: StretchRepository,
+    private val stretch: StretchLauncher,
 ) : ViewModel() {
 
     private val since: Long = LocalDate.now().minusWeeks(HEATMAP_WEEKS.toLong() + 1)
@@ -44,7 +55,8 @@ class TodayViewModel @Inject constructor(
         repo.observeRoutines(),
         repo.observeRoutineLastUse(),
         repo.observeFinishedSince(since),
-    ) { active, routines, lastUse, finished ->
+        stretchRepo.observeToday(),
+    ) { active, routines, lastUse, finished, stretchToday ->
         val today = LocalDate.now()
         val weekStart = Streaks.weekStart(today)
         val dates = finished.map { Fmt.toLocalDate(it.startedAt) }
@@ -71,6 +83,10 @@ class TodayViewModel @Inject constructor(
             weekStreak = Streaks.weeksInRow(dates, today),
             last = finished.maxByOrNull { it.startedAt },
             heatmap = heat,
+            stretchToday = stretchToday,
+            strengthTodayId = finished
+                .filter { it.type == WorkoutType.STRENGTH && Fmt.toLocalDate(it.startedAt) == today }
+                .maxByOrNull { it.startedAt }?.id,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), TodayState())
 
@@ -80,6 +96,23 @@ class TodayViewModel @Inject constructor(
 
     fun startRoutine(id: Long, onStarted: (Long) -> Unit) {
         viewModelScope.launch { onStarted(repo.startFromRoutine(id)) }
+    }
+
+    /** Запустить растяжку: перед — разминка, после — заминка под сегодняшнюю силовую. */
+    fun startStretch(phase: StretchPhase, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val ok = when (phase) {
+                StretchPhase.BEFORE -> stretch.startTemplate(StretchTemplates.before)
+                StretchPhase.AFTER -> state.value.strengthTodayId?.let { stretch.startAfterWorkout(it) }
+                    ?: stretch.startTemplate(StretchTemplates.suggestAfter(emptyList()))
+                StretchPhase.ANY -> stretch.startTemplate(StretchTemplates.all.first { it.phase == StretchPhase.ANY })
+            }
+            onResult(ok)
+        }
+    }
+
+    fun markStretch(name: String, phase: StretchPhase, minutes: Int) {
+        viewModelScope.launch { stretchRepo.markDone(name, phase, minutes) }
     }
 
     companion object {

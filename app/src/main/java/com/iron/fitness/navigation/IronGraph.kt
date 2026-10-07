@@ -20,6 +20,7 @@ import com.iron.fitness.feature.workouts.WorkoutsScreen
 import com.iron.fitness.feature.cardio.run.IntervalRunScreen
 import com.iron.fitness.feature.cardio.ui.CardioLogScreen
 import com.iron.fitness.feature.cardio.ui.IntervalEditorScreen
+import com.iron.fitness.feature.stretching.ui.StretchEditorScreen
 import com.iron.fitness.feature.workouts.history.HistoryScreen
 import com.iron.fitness.feature.workouts.history.WorkoutDetailScreen
 import com.iron.fitness.feature.workouts.routine.RoutineEditorScreen
@@ -121,7 +122,7 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         Routes.WORKOUT_SUMMARY_PATTERN,
         arguments = listOf(navArgument("id") { type = NavType.LongType }),
     ) {
-        WorkoutSummaryScreen(onDone = back)
+        WorkoutSummaryScreen(onDone = back, onStretchStarted = { go(Routes.INTERVAL_RUN) })
     }
     composable(
         Routes.WORKOUT_DETAIL_PATTERN,
@@ -161,6 +162,18 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         IntervalEditorScreen(
             onBack = back,
             onPickExercise = { go(Routes.library(mode = "pick")) },
+            pickedExercises = picked,
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(
+        Routes.STRETCH_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) { entry ->
+        val picked = entry.pickedExercises()
+        StretchEditorScreen(
+            onBack = back,
+            onAddExercises = { go(Routes.library(mode = "pickMany", category = "STRETCHING")) },
             pickedExercises = picked,
             onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
         )

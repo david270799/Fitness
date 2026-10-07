@@ -38,6 +38,7 @@ import com.iron.fitness.core.ui.components.SecondaryButton
 import com.iron.fitness.core.ui.components.SectionTitle
 import com.iron.fitness.core.ui.theme.Iron
 import com.iron.fitness.core.util.Fmt
+import com.iron.fitness.feature.stretching.data.StretchLauncher
 import com.iron.fitness.feature.workouts.data.RecordItem
 import com.iron.fitness.feature.workouts.data.RecordKind
 import com.iron.fitness.feature.workouts.data.WorkoutRepository
@@ -52,6 +53,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WorkoutSummaryViewModel @Inject constructor(
     private val repo: WorkoutRepository,
+    private val stretch: StretchLauncher,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val workoutId: Long = checkNotNull(savedStateHandle.get<Long>("id"))
@@ -60,6 +62,11 @@ class WorkoutSummaryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch { _summary.value = repo.summary(workoutId) }
+    }
+
+    /** Заминка, подобранная под мышцы этой тренировки. */
+    fun startStretch(onResult: (Boolean) -> Unit) {
+        viewModelScope.launch { onResult(stretch.startAfterWorkout(workoutId)) }
     }
 
     fun saveAsRoutine(onDone: () -> Unit) {
@@ -73,12 +80,14 @@ class WorkoutSummaryViewModel @Inject constructor(
 @Composable
 fun WorkoutSummaryScreen(
     onDone: () -> Unit,
+    onStretchStarted: () -> Unit,
     viewModel: WorkoutSummaryViewModel = hiltViewModel(),
 ) {
     val summary by viewModel.summary.collectAsStateWithLifecycle()
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val savedText = stringResource(R.string.summary_routine_saved)
+    val busyText = stringResource(R.string.run_busy_text)
     IronScaffold(title = stringResource(R.string.summary_title), onBack = onDone, snackbarHostState = snackbar) { padding ->
         val s = summary ?: return@IronScaffold
         Column(
@@ -103,6 +112,16 @@ fun WorkoutSummaryScreen(
                 }
             }
             Spacer(Modifier.height(8.dp))
+            SecondaryButton(
+                stringResource(R.string.summary_stretch_after),
+                {
+                    viewModel.startStretch { ok ->
+                        if (ok) onStretchStarted() else scope.launch { snackbar.showSnackbar(busyText) }
+                    }
+                },
+                icon = IronIcons.Stretch,
+                modifier = Modifier.fillMaxWidth(),
+            )
             SecondaryButton(
                 stringResource(R.string.summary_save_routine),
                 { viewModel.saveAsRoutine { scope.launch { snackbar.showSnackbar(savedText) } } },

@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat
 import com.iron.fitness.core.domain.BlockType
 import com.iron.fitness.core.domain.Intervals
 import com.iron.fitness.core.domain.Phase
+import com.iron.fitness.core.domain.StretchPhase
+import com.iron.fitness.core.domain.Stretching
+import com.iron.fitness.feature.stretching.data.StretchRepository
 import com.iron.fitness.di.ApplicationScope
 import com.iron.fitness.feature.cardio.data.CardioEntry
 import com.iron.fitness.feature.cardio.data.CardioRepository
@@ -26,7 +29,7 @@ import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class RunKind { INTERVAL, CARDIO }
+enum class RunKind { INTERVAL, CARDIO, STRETCHING }
 
 /**
  * Состояние запущенной программы. Время — по elapsedRealtime: не зависит от сна экрана и смены часов.
@@ -48,6 +51,9 @@ data class RunState(
     val spentMs: Map<BlockType, Long> = emptyMap(),
     val finished: Boolean = false,
     val savedWorkoutId: Long? = null,
+    /** Для растяжки: перед/после и связанная силовая тренировка. */
+    val stretchPhase: StretchPhase? = null,
+    val linkedWorkoutId: Long? = null,
 ) {
     val paused: Boolean get() = runningSince == null
     val current: Phase? get() = phases.getOrNull(index)
@@ -91,6 +97,7 @@ enum class RunnerEvent { NEXT_PHASE, FINISHED }
 class ProgramRunner @Inject constructor(
     @ApplicationContext private val context: Context,
     private val repository: CardioRepository,
+    private val stretches: StretchRepository,
     @ApplicationScope private val scope: CoroutineScope,
 ) {
     private val _state = MutableStateFlow<RunState?>(null)
@@ -111,6 +118,24 @@ class ProgramRunner @Inject constructor(
             phases = phases,
             runningSince = SystemClock.elapsedRealtime(),
             startedAtWall = System.currentTimeMillis(),
+        )
+        startService()
+    }
+
+    /** Комплекс растяжки с таймером удержания. */
+    fun startStretch(title: String, phases: List<Phase>, phase: StretchPhase, linkedWorkoutId: Long?, routineId: Long?) {
+        if (phases.isEmpty()) return
+        _state.value = RunState(
+            kind = RunKind.STRETCHING,
+            title = title,
+            programId = routineId,
+            cardioType = null,
+            workMet = Stretching.MET,
+            phases = phases,
+            runningSince = SystemClock.elapsedRealtime(),
+            startedAtWall = System.currentTimeMillis(),
+            stretchPhase = phase,
+            linkedWorkoutId = linkedWorkoutId,
         )
         startService()
     }
@@ -205,6 +230,14 @@ class ProgramRunner @Inject constructor(
                         startedAt = current.startedAtWall,
                         spentMsByType = current.spentMs,
                         workMet = current.workMet,
+                    )
+                    RunKind.STRETCHING -> stretches.saveStretch(
+                        name = current.title,
+                        phase = current.stretchPhase ?: StretchPhase.ANY,
+                        startedAt = current.startedAtWall,
+                        durationSec = current.spentMs.values.sum() / 1000,
+                        linkedWorkoutId = current.linkedWorkoutId,
+                        programId = current.programId,
                     )
                     RunKind.CARDIO -> repository.saveCardio(
                         CardioEntry(

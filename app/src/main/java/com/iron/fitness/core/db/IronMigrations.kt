@@ -21,5 +21,17 @@ object IronMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3)
+    /** Этап 5: свои комплексы растяжки. */
+    const val CREATE_STRETCH_ROUTINES =
+        "CREATE TABLE IF NOT EXISTS `stretch_routines` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`name` TEXT NOT NULL, `phase` TEXT NOT NULL, `itemsJson` TEXT NOT NULL, " +
+            "`createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL)"
+
+    val MIGRATION_3_4 = object : Migration(3, 4) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(CREATE_STRETCH_ROUTINES)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4)
 }
