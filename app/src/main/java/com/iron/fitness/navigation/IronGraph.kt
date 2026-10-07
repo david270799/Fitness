@@ -22,6 +22,9 @@ import com.iron.fitness.feature.cardio.ui.CardioLogScreen
 import com.iron.fitness.feature.cardio.ui.IntervalEditorScreen
 import com.iron.fitness.feature.stretching.ui.StretchEditorScreen
 import com.iron.fitness.feature.daily.ui.ChallengeDetailScreen
+import com.iron.fitness.feature.body.ui.BodyMetricScreen
+import com.iron.fitness.feature.body.ui.MeasurementEditScreen
+import com.iron.fitness.feature.body.ui.ProgressPhotosScreen
 import com.iron.fitness.feature.reminders.ui.PermissionsScreen
 import com.iron.fitness.feature.reminders.ui.ReminderDetailScreen
 import com.iron.fitness.feature.reminders.ui.ReminderEditScreen
@@ -186,6 +189,21 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
             onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
         )
     }
+    // ---------- Тело ----------
+    composable(Routes.PROGRESS_PHOTOS) { ProgressPhotosScreen(onBack = back) }
+    composable(
+        Routes.MEASUREMENT_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) {
+        MeasurementEditScreen(onBack = back)
+    }
+    composable(
+        Routes.BODY_METRIC_PATTERN,
+        arguments = listOf(navArgument("metric") { type = NavType.StringType }),
+    ) {
+        BodyMetricScreen(onBack = back, navigate = go)
+    }
+
     // ---------- Напоминания ----------
     composable(Routes.REMINDERS) { RemindersScreen(onBack = back, navigate = go) }
     composable(Routes.PERMISSIONS) { PermissionsScreen(onDone = back) }

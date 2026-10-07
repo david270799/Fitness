@@ -42,6 +42,9 @@ object Routes {
     const val CHALLENGE_PATTERN = "challenge/{id}"
     const val REMINDERS = "reminders"
     const val STATS = "stats"
+    const val PROGRESS_PHOTOS = "progress_photos"
+    const val MEASUREMENT_EDIT_PATTERN = "measurement_edit?id={id}"
+    const val BODY_METRIC_PATTERN = "body_metric/{metric}"
     const val PERMISSIONS = "permissions"
     const val REMINDER_DETAIL_PATTERN = "reminder/{id}"
     const val REMINDER_EDIT_PATTERN = "reminder_edit?id={id}"
@@ -62,6 +65,8 @@ object Routes {
     fun stretchEdit(id: Long? = null) = "stretch_edit" + (id?.let { "?id=$it" } ?: "")
     fun challenge(id: Long) = "challenge/$id"
     fun reminderDetail(id: Long) = "reminder/$id"
+    fun measurementEdit(id: Long? = null) = "measurement_edit" + (id?.let { "?id=$it" } ?: "")
+    fun bodyMetric(metric: String) = "body_metric/$metric"
     fun reminderEdit(id: Long? = null) = "reminder_edit" + (id?.let { "?id=$it" } ?: "")
     fun challengeEdit(id: Long? = null) = "challenge_edit" + (id?.let { "?id=$it" } ?: "")
 

@@ -81,5 +81,29 @@ object IronMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+    /** Этап 9: замеры тела и фото прогресса. */
+    const val CREATE_BODY_MEASUREMENTS =
+        "CREATE TABLE IF NOT EXISTS `body_measurements` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`day` INTEGER NOT NULL, `weightKg` REAL, `bodyFatPct` REAL, `waistCm` REAL, `chestCm` REAL, " +
+            "`hipsCm` REAL, `armCm` REAL, `thighCm` REAL, `calfCm` REAL, `neckCm` REAL, `note` TEXT, " +
+            "`createdAt` INTEGER NOT NULL)"
+    const val INDEX_BODY_MEASUREMENTS =
+        "CREATE INDEX IF NOT EXISTS `index_body_measurements_day` ON `body_measurements` (`day`)"
+    const val CREATE_PROGRESS_PHOTOS =
+        "CREATE TABLE IF NOT EXISTS `progress_photos` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`day` INTEGER NOT NULL, `path` TEXT NOT NULL, `pose` TEXT NOT NULL, `weightKg` REAL, `note` TEXT, " +
+            "`createdAt` INTEGER NOT NULL)"
+    const val INDEX_PROGRESS_PHOTOS =
+        "CREATE INDEX IF NOT EXISTS `index_progress_photos_day` ON `progress_photos` (`day`)"
+
+    val MIGRATION_6_7 = object : Migration(6, 7) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(CREATE_BODY_MEASUREMENTS)
+            db.execSQL(INDEX_BODY_MEASUREMENTS)
+            db.execSQL(CREATE_PROGRESS_PHOTOS)
+            db.execSQL(INDEX_PROGRESS_PHOTOS)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
 }

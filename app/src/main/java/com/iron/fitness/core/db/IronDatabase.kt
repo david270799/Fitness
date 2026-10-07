@@ -9,6 +9,9 @@ import com.iron.fitness.feature.daily.data.ChallengeDao
 import com.iron.fitness.feature.daily.data.ChallengeEntity
 import com.iron.fitness.feature.daily.data.ChallengeGoalEntity
 import com.iron.fitness.feature.daily.data.ChallengeLogEntity
+import com.iron.fitness.feature.body.data.BodyDao
+import com.iron.fitness.feature.body.data.MeasurementEntity
+import com.iron.fitness.feature.body.data.ProgressPhotoEntity
 import com.iron.fitness.feature.exercises.data.ExerciseDao
 import com.iron.fitness.feature.reminders.data.ReminderDao
 import com.iron.fitness.feature.reminders.data.ReminderEntity
@@ -38,6 +41,8 @@ import com.iron.fitness.feature.workouts.data.WorkoutSetEntity
         ChallengeLogEntity::class,
         ReminderEntity::class,
         ReminderLogEntity::class,
+        MeasurementEntity::class,
+        ProgressPhotoEntity::class,
     ],
     version = IronDatabase.VERSION,
     exportSchema = true,
@@ -50,9 +55,10 @@ abstract class IronDatabase : RoomDatabase() {
     abstract fun stretchDao(): StretchDao
     abstract fun challengeDao(): ChallengeDao
     abstract fun reminderDao(): ReminderDao
+    abstract fun bodyDao(): BodyDao
 
     companion object {
-        const val VERSION = 6
+        const val VERSION = 7
         const val NAME = "iron.db"
     }
 }

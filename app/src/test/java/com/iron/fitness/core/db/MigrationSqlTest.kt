@@ -79,6 +79,15 @@ class MigrationSqlTest {
     }
 
     @Test
+    fun bodyTablesMatchRoom() {
+        val db = current()
+        assertEquals(createSql(db, "body_measurements"), IronMigrations.CREATE_BODY_MEASUREMENTS)
+        assertEquals(createSql(db, "progress_photos"), IronMigrations.CREATE_PROGRESS_PHOTOS)
+        assertEquals(listOf(IronMigrations.INDEX_BODY_MEASUREMENTS), indexSql(db, "body_measurements"))
+        assertEquals(listOf(IronMigrations.INDEX_PROGRESS_PHOTOS), indexSql(db, "progress_photos"))
+    }
+
+    @Test
     fun migrationsCoverEveryVersionStep() {
         val steps = IronMigrations.ALL.map { it.startVersion to it.endVersion }
         for (v in 2 until IronDatabase.VERSION) {

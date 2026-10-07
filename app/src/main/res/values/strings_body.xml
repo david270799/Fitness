@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="body_add_measurement">Новый замер</string>
+    <string name="body_measurement">Замер</string>
+    <string name="body_empty">Запишите вес и обхваты — появятся графики, динамика за месяц и прогресс к цели.</string>
+    <string name="body_weight">Вес</string>
+    <string name="body_fat">Жир</string>
+    <string name="body_waist">Талия</string>
+    <string name="body_chest">Грудь</string>
+    <string name="body_hips">Ягодицы</string>
+    <string name="body_arm">Бицепс</string>
+    <string name="body_thigh">Бедро</string>
+    <string name="body_calf">Голень</string>
+    <string name="body_neck">Шея</string>
+    <string name="body_delta_month">за месяц: %1$s</string>
+    <string name="body_goal">Цель</string>
+    <string name="body_to_goal">до цели: %1$s кг</string>
+    <string name="body_goal_title">Цель по весу</string>
+    <string name="body_goal_label">Вес, кг</string>
+    <string name="body_goal_hint">Пустое поле — без цели</string>
+    <string name="body_history">История замеров</string>
+    <string name="body_chart_need_more">График появится после двух замеров.</string>
+    <string name="body_fill_hint">Заполните только то, что измерили сегодня. Остальные поля можно оставить пустыми.</string>
+    <string name="body_how_to_measure">Как мерить: утром натощак, в одно и то же время; обхваты — лентой без натяжения, талия — на уровне пупка, бицепс — в напряжении в самой широкой части.</string>
+
+    <string name="body_photos">Фото прогресса</string>
+    <string name="body_photos_all">Все фото</string>
+    <string name="body_photos_empty">Добавьте первое фото — через месяц будет с чем сравнить.</string>
+    <string name="photos_private">Фото хранятся только в приватной папке приложения и не попадают в галерею.</string>
+    <string name="photos_empty">Фото пока нет.</string>
+    <string name="photos_add">Новое фото</string>
+    <string name="photos_tip">Для сравнения снимайте при одинаковом свете, ракурсе и расстоянии.</string>
+    <string name="photos_compare">Сравнить</string>
+    <string name="photos_compare_hint">Выберите два фото — «до» и «после».</string>
+    <string name="photos_before">До</string>
+    <string name="photos_after">После</string>
+    <string name="photos_delete_text">Фото будет удалено с телефона.</string>
+    <string name="pose_front">Спереди</string>
+    <string name="pose_side">Сбоку</string>
+    <string name="pose_back">Сзади</string>
+
+    <string name="body_insights">Анализ по вашим данным</string>
+    <string name="body_strengths">Сильные стороны</string>
+    <string name="body_weaknesses">Зоны роста</string>
+    <string name="body_insights_note">Простые правила по журналу за последние 2–4 недели и замерам, без ИИ.</string>
+    <string name="ins_freq_good">Регулярность: %1$s тренировки в неделю</string>
+    <string name="ins_freq_low">Мало тренировок: %1$s в неделю. Цель — от 3</string>
+    <string name="ins_pull_lagging">Тяговые отстают: жимовых подходов в %1$s раза больше. Добавьте тяги и подтягивания</string>
+    <string name="ins_push_pull_ok">Жимы и тяги в балансе</string>
+    <string name="ins_lower_lagging">Ноги отстают: на низ тела только %1$s %% рабочих подходов</string>
+    <string name="ins_upper_lower_ok">Верх и низ тела проработаны равномерно</string>
+    <string name="ins_pr">Сила растёт: рекордов за месяц — %1$d</string>
+    <string name="ins_no_pr">Месяц без рекордов — пора поменять схему или нагрузку</string>
+    <string name="ins_cardio_good">Кардио: %1$d за две недели</string>
+    <string name="ins_cardio_none">Нет кардио за две недели</string>
+    <string name="ins_stretch_good">Растяжка: %1$d за две недели</string>
+    <string name="ins_stretch_none">Нет растяжки за две недели</string>
+    <string name="ins_weight_towards">Вес движется к цели: %1$s кг за месяц</string>
+    <string name="ins_weight_away">Вес уходит от цели: %1$s кг за месяц</string>
+    <string name="ins_waist_down">Талия уменьшилась: %1$s см за месяц</string>
+    <string name="ins_waist_up">Талия выросла: %1$s см за месяц</string>
+    <string name="body_disclaimer">Анализ и оценки в приложении не являются медицинской рекомендацией. При вопросах о здоровье обращайтесь к врачу.</string>
+</resources>
