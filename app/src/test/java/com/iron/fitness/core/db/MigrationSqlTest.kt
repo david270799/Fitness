@@ -71,6 +71,14 @@ class MigrationSqlTest {
     }
 
     @Test
+    fun reminderTablesMatchRoom() {
+        val db = current()
+        assertEquals(createSql(db, "reminders"), IronMigrations.CREATE_REMINDERS)
+        assertEquals(createSql(db, "reminder_logs"), IronMigrations.CREATE_REMINDER_LOGS)
+        assertEquals(listOf(IronMigrations.INDEX_REMINDER_LOGS), indexSql(db, "reminder_logs"))
+    }
+
+    @Test
     fun migrationsCoverEveryVersionStep() {
         val steps = IronMigrations.ALL.map { it.startVersion to it.endVersion }
         for (v in 2 until IronDatabase.VERSION) {

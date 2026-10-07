@@ -61,5 +61,25 @@ object IronMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+    /** Этап 7: напоминания о приёме и журнал приёмов. */
+    const val CREATE_REMINDERS =
+        "CREATE TABLE IF NOT EXISTS `reminders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`name` TEXT NOT NULL, `dose` TEXT, `note` TEXT, `photoPath` TEXT, `times` TEXT NOT NULL, " +
+            "`weekdays` INTEGER NOT NULL, `enabled` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL)"
+    const val CREATE_REMINDER_LOGS =
+        "CREATE TABLE IF NOT EXISTS `reminder_logs` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`reminderId` INTEGER NOT NULL, `scheduledAt` INTEGER NOT NULL, `status` TEXT NOT NULL, " +
+            "`actedAt` INTEGER, `repeats` INTEGER NOT NULL)"
+    const val INDEX_REMINDER_LOGS =
+        "CREATE UNIQUE INDEX IF NOT EXISTS `index_reminder_logs_reminderId_scheduledAt` ON `reminder_logs` (`reminderId`, `scheduledAt`)"
+
+    val MIGRATION_5_6 = object : Migration(5, 6) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(CREATE_REMINDERS)
+            db.execSQL(CREATE_REMINDER_LOGS)
+            db.execSQL(INDEX_REMINDER_LOGS)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
 }

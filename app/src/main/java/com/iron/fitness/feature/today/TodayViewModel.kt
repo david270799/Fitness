@@ -5,6 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.iron.fitness.core.domain.StretchPhase
 import com.iron.fitness.core.domain.Streaks
 import com.iron.fitness.feature.daily.data.ChallengeRepository
+import com.iron.fitness.feature.reminders.data.ReminderAlarms
+import com.iron.fitness.feature.reminders.data.ReminderRepository
+import com.iron.fitness.feature.reminders.ui.TodayDose
+import com.iron.fitness.feature.reminders.ui.todayDoses
 import com.iron.fitness.feature.daily.data.ChallengeUi
 import com.iron.fitness.feature.stretching.data.StretchLauncher
 import com.iron.fitness.feature.stretching.data.StretchRepository
@@ -48,7 +52,20 @@ class TodayViewModel @Inject constructor(
     private val stretchRepo: StretchRepository,
     private val stretch: StretchLauncher,
     private val challenges: ChallengeRepository,
+    reminders: ReminderRepository,
+    private val reminderAlarms: ReminderAlarms,
 ) : ViewModel() {
+
+    private val dayStart = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+
+    /** Приёмы по напоминаниям на сегодня. */
+    val doses: StateFlow<List<TodayDose>> = combine(reminders.observeAll(), reminders.observeLogsSince(dayStart)) { list, logs ->
+        todayDoses(list, logs)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    fun takeDose(d: TodayDose) {
+        viewModelScope.launch { reminderAlarms.onTaken(d.reminder.id, d.at) }
+    }
 
     /** Дневные челленджи для мини-карточек. */
     val challengeList: StateFlow<List<ChallengeUi>> = challenges.observeActive()

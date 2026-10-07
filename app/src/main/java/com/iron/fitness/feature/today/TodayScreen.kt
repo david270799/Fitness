@@ -37,6 +37,7 @@ import com.iron.fitness.core.ui.components.IronChip
 import com.iron.fitness.core.ui.components.IronIcon
 import com.iron.fitness.core.ui.components.GhostButton
 import com.iron.fitness.feature.daily.ui.ChallengeCard
+import com.iron.fitness.feature.reminders.ui.DoseStatusChip
 import com.iron.fitness.feature.stretching.ui.MarkStretchSheet
 import com.iron.fitness.feature.stretching.ui.stretchPhaseLabel
 import com.iron.fitness.feature.workouts.ActiveWorkoutBanner
@@ -111,6 +112,18 @@ fun TodayScreen(
                 sub = stringResource(R.string.unit_kg),
                 modifier = Modifier.weight(1f),
             )
+        }
+
+        val doses by viewModel.doses.collectAsStateWithLifecycle()
+        if (doses.isNotEmpty()) {
+            SectionTitle(stringResource(R.string.reminder_today)) {
+                GhostButton(stringResource(R.string.action_open), { navigate(Routes.REMINDERS) })
+            }
+            IronCard(modifier = Modifier.fillMaxWidth()) {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    doses.forEach { d -> DoseStatusChip(d) { viewModel.takeDose(d) } }
+                }
+            }
         }
 
         val challengeList by viewModel.challengeList.collectAsStateWithLifecycle()

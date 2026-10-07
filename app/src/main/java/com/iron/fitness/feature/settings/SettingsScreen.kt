@@ -42,7 +42,9 @@ import com.iron.fitness.core.ui.components.GhostButton
 import com.iron.fitness.core.ui.components.IronCard
 import com.iron.fitness.core.ui.components.IronChip
 import com.iron.fitness.core.ui.components.IronDivider
+import com.iron.fitness.core.ui.components.IronIcon
 import com.iron.fitness.core.ui.components.IronIconButton
+import com.iron.fitness.navigation.Routes
 import com.iron.fitness.core.ui.components.SwitchRow
 import com.iron.fitness.core.ui.components.PrimaryButton
 import com.iron.fitness.core.ui.components.SecondaryButton
@@ -73,6 +75,7 @@ fun SettingsScreen(
         ) {
             AppearanceSection(settings, viewModel)
             WorkoutSection(settings, viewModel)
+            ReminderSection(settings, viewModel, navigate)
             ImagesSection(viewModel)
             Spacer(Modifier.height(24.dp))
         }
@@ -242,6 +245,45 @@ private fun WorkoutSection(settings: AppSettings, viewModel: SettingsViewModel) 
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ReminderSection(settings: AppSettings, viewModel: SettingsViewModel, navigate: (String) -> Unit) {
+    SectionTitle(stringResource(R.string.settings_section_reminders))
+    IronCard(contentPadding = PaddingValues(0.dp)) {
+        ListRow(
+            title = stringResource(R.string.settings_repeat_interval),
+            subtitle = stringResource(R.string.settings_repeat_interval_sub),
+            icon = IronIcons.Repeat,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IronIconButton(IronIcons.Remove, null, { viewModel.setReminderRepeat(settings.reminderRepeatMinutes - 5, settings.reminderRepeatCount) })
+                Text(stringResource(R.string.minutes_short, settings.reminderRepeatMinutes), style = Iron.numbers.small)
+                IronIconButton(IronIcons.Add, null, { viewModel.setReminderRepeat(settings.reminderRepeatMinutes + 5, settings.reminderRepeatCount) })
+            }
+        }
+        IronDivider()
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(stringResource(R.string.settings_repeat_count), style = MaterialTheme.typography.bodyLarge)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                (0..3).forEach { n ->
+                    IronChip(
+                        text = if (n == 0) stringResource(R.string.settings_repeat_none) else n.toString(),
+                        selected = settings.reminderRepeatCount == n,
+                        onClick = { viewModel.setReminderRepeat(settings.reminderRepeatMinutes, n) },
+                    )
+                }
+            }
+        }
+        IronDivider()
+        ListRow(
+            title = stringResource(R.string.perm_title),
+            subtitle = stringResource(R.string.settings_permissions_sub),
+            icon = IronIcons.Shield,
+            onClick = { navigate(Routes.PERMISSIONS) },
+            trailing = { IronIcon(IronIcons.ChevronRight, null, tint = Iron.colors.textSecondary) },
+        )
     }
 }
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_reminders">Напоминания о приёме</string>
+    <string name="notif_channel_reminders_desc">Витамины, лекарства, вода — со звуком и повтором</string>
+    <string name="reminder_taken">Принял</string>
+    <string name="reminder_snooze">Отложить на 10 минут</string>
+
+    <string name="reminder_new">Новое напоминание</string>
+    <string name="reminder_edit">Напоминание</string>
+    <string name="reminder_today">Приём сегодня</string>
+    <string name="reminder_empty">Добавьте витамины или лекарства: фото, дозу, время и дни недели. Уведомление придёт даже в режиме сна телефона.</string>
+    <string name="reminder_exact_warning">Точные будильники не разрешены — напоминание может прийти с опозданием. Нажмите, чтобы разрешить.</string>
+    <string name="reminder_every_day">Каждый день</string>
+    <string name="reminder_weekdays">По будням</string>
+    <string name="reminder_disabled">Выключено</string>
+
+    <string name="reminder_status_taken">принято</string>
+    <string name="reminder_status_missed">пропущено</string>
+    <string name="reminder_status_skipped">пропуск по плану</string>
+    <string name="reminder_status_due">пора принять</string>
+    <string name="reminder_status_planned">запланировано</string>
+
+    <string name="reminder_name">Название</string>
+    <string name="reminder_name_hint">Например: Витамин D</string>
+    <string name="reminder_dose">Доза</string>
+    <string name="reminder_dose_hint">Например: 1 капсула, 2000 МЕ</string>
+    <string name="reminder_times">Время приёма</string>
+    <string name="reminder_add_time">Добавить время</string>
+    <string name="reminder_days">Дни недели</string>
+    <string name="reminder_times_error">Нужно хотя бы одно время и один день недели</string>
+    <string name="reminder_photo">Фото упаковки</string>
+    <string name="reminder_note">Заметка</string>
+    <string name="reminder_note_hint">Например: после еды</string>
+    <string name="reminder_delete_title">Удалить напоминание?</string>
+    <string name="reminder_delete_text">История приёмов этого напоминания тоже удалится.</string>
+
+    <string name="reminder_adherence">Соблюдение за 30 дней</string>
+    <string name="reminder_adherence_detail">Принято: %1$d · пропущено: %2$d</string>
+    <string name="reminder_history">История приёмов</string>
+    <string name="reminder_history_empty">Записи появятся после первого напоминания.</string>
+    <string name="reminder_mark_missed">Не принимал</string>
+
+    <!-- Разрешения -->
+    <string name="perm_title">Разрешения</string>
+    <string name="perm_intro">Чтобы напоминания и таймеры работали надёжно, приложению нужны три разрешения. Их можно выдать сейчас или позже в настройках.</string>
+    <string name="perm_notifications">Уведомления</string>
+    <string name="perm_notifications_text">Без них не будет видно таймера отдыха, напоминаний о витаминах и челленджей. На Android 13 и новее разрешение нужно дать явно.</string>
+    <string name="perm_allow">Разрешить</string>
+    <string name="perm_exact">Точные будильники</string>
+    <string name="perm_exact_text">Нужны, чтобы напоминание о приёме пришло ровно в назначенное время, даже в режиме сна (Doze). Без этого система может задержать его на несколько минут.</string>
+    <string name="perm_open_settings">Открыть настройки</string>
+    <string name="perm_battery">Без ограничений батареи</string>
+    <string name="perm_battery_text">Некоторые телефоны агрессивно останавливают фоновые приложения. Исключение из оптимизации батареи помогает таймерам и напоминаниям не пропадать. На заряд почти не влияет: приложение просыпается только по будильнику.</string>
+    <string name="perm_vendor_hint">На Xiaomi, Huawei, Samsung и некоторых других телефонах дополнительно может понадобиться разрешить «Автозапуск» для IRON в настройках системы.</string>
+    <string name="perm_granted">Разрешено</string>
+
+    <!-- Настройки -->
+    <string name="settings_section_reminders">Напоминания</string>
+    <string name="settings_repeat_interval">Повторять через</string>
+    <string name="settings_repeat_interval_sub">Если не нажали «Принял»</string>
+    <string name="settings_repeat_count">Сколько раз повторять</string>
+    <string name="settings_repeat_none">Не повторять</string>
+    <string name="settings_permissions_sub">Уведомления, точные будильники, батарея</string>
+</resources>

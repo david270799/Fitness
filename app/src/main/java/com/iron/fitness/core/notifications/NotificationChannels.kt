@@ -10,6 +10,7 @@ object NotificationChannels {
     const val DOWNLOADS = "downloads"
     const val TIMER = "timer"
     const val CHALLENGES = "challenges"
+    const val REMINDERS = "reminders"
 
     fun createAll(context: Context) {
         val ru = context.withRussianLocale()
@@ -22,6 +23,11 @@ object NotificationChannels {
                 lockscreenVisibility = android.app.Notification.VISIBILITY_PUBLIC
             },
             NotificationChannel(CHALLENGES, ru.getString(R.string.notif_channel_challenges), NotificationManager.IMPORTANCE_DEFAULT),
+            NotificationChannel(REMINDERS, ru.getString(R.string.notif_channel_reminders), NotificationManager.IMPORTANCE_HIGH).apply {
+                description = ru.getString(R.string.notif_channel_reminders_desc)
+                enableVibration(true)
+                lockscreenVisibility = android.app.Notification.VISIBILITY_PRIVATE
+            },
         ) + extraChannels(ru)
         manager.createNotificationChannels(channels)
     }

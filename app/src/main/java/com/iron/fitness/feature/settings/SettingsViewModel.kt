@@ -67,6 +67,7 @@ class SettingsViewModel @Inject constructor(
     fun setSound(value: Boolean) = launch { repo.setSound(value) }
     fun setVibration(value: Boolean) = launch { repo.setVibration(value) }
     fun setVoiceHints(value: Boolean) = launch { repo.setVoiceHints(value) }
+    fun setReminderRepeat(minutes: Int, count: Int) = launch { repo.setReminderRepeat(minutes, count) }
     fun setBarWeight(kg: Double) = launch { repo.setBarWeight(kg) }
     fun togglePlate(kg: Double) = launch {
         val current = settings.value.plates

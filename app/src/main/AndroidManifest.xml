@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <!-- Синтез речи для голосовых подсказок интервального таймера (Android 11+). -->
     <queries>
@@ -64,6 +65,10 @@
 
         <receiver
             android:name=".feature.daily.data.ChallengeReminderReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".feature.reminders.data.ReminderReceiver"
             android:exported="false" />
 
         <receiver

@@ -44,6 +44,13 @@ fun IronAppRoot(
     val currentRoute = backStack?.destination?.route
     val topLevel = TopLevel.entries.firstOrNull { it.route == currentRoute }
 
+    // Первый запуск: объяснить и запросить разрешения (уведомления, будильники, батарея).
+    LaunchedEffect(settings.onboardingDone) {
+        if (!settings.onboardingDone) {
+            runCatching { navController.navigate(Routes.PERMISSIONS) { launchSingleTop = true } }
+        }
+    }
+
     val externalRoute = pendingRoute.value
     LaunchedEffect(externalRoute) {
         if (externalRoute != null) {

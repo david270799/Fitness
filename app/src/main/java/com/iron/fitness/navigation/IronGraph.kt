@@ -22,6 +22,10 @@ import com.iron.fitness.feature.cardio.ui.CardioLogScreen
 import com.iron.fitness.feature.cardio.ui.IntervalEditorScreen
 import com.iron.fitness.feature.stretching.ui.StretchEditorScreen
 import com.iron.fitness.feature.daily.ui.ChallengeDetailScreen
+import com.iron.fitness.feature.reminders.ui.PermissionsScreen
+import com.iron.fitness.feature.reminders.ui.ReminderDetailScreen
+import com.iron.fitness.feature.reminders.ui.ReminderEditScreen
+import com.iron.fitness.feature.reminders.ui.RemindersScreen
 import com.iron.fitness.feature.daily.ui.ChallengeEditScreen
 import com.iron.fitness.feature.workouts.history.HistoryScreen
 import com.iron.fitness.feature.workouts.history.WorkoutDetailScreen
@@ -180,6 +184,28 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
             onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
         )
     }
+    // ---------- Напоминания ----------
+    composable(Routes.REMINDERS) { RemindersScreen(onBack = back, navigate = go) }
+    composable(Routes.PERMISSIONS) { PermissionsScreen(onDone = back) }
+    composable(
+        Routes.REMINDER_DETAIL_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType }),
+    ) {
+        ReminderDetailScreen(onBack = back, onEdit = { go(Routes.reminderEdit(it)) })
+    }
+    composable(
+        Routes.REMINDER_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) {
+        ReminderEditScreen(
+            onBack = back,
+            onDeleted = {
+                // Удалили из редактора: уходим и с карточки напоминания.
+                nav.popBackStack(Routes.REMINDERS, inclusive = false) || nav.popBackStack()
+            },
+        )
+    }
+
     // ---------- Дневные челленджи ----------
     composable(
         Routes.CHALLENGE_PATTERN,
