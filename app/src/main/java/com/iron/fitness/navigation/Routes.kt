@@ -59,6 +59,7 @@ object Routes {
     const val INBODY = "inbody"
     const val INBODY_NEW = "inbody_new"
     const val INBODY_DETAIL_PATTERN = "inbody/{id}"
+    const val BACKUP = "backup"
 
     /** Ключ результата выбора упражнений в SavedStateHandle предыдущего экрана. */
     const val RESULT_PICKED_EXERCISES = "picked_exercises"

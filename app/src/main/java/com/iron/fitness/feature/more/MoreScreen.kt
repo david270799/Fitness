@@ -33,6 +33,7 @@ private val items = listOf(
     MoreItem(Routes.STATS, R.string.more_stats, R.string.more_stats_sub, IronIcons.ChartBar),
     MoreItem(Routes.HISTORY, R.string.history_title, R.string.more_history_sub, IronIcons.History),
     MoreItem(Routes.TOOLS, R.string.more_tools, R.string.more_tools_sub, IronIcons.Calculator),
+    MoreItem(Routes.BACKUP, R.string.more_backup, R.string.more_backup_sub, IronIcons.CloudUpload),
     MoreItem(Routes.SETTINGS, R.string.more_settings, R.string.more_settings_sub, IronIcons.Settings),
     MoreItem(Routes.ABOUT, R.string.more_about, R.string.more_about_sub, IronIcons.Info),
 )

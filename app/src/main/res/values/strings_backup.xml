@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backup_title">Бэкап</string>
+    <string name="backup_what">В бэкап входят все записи (тренировки, шаблоны, челленджи, напоминания, замеры, InBody), настройки и фото. Не входят ключ Gemini и кэш картинок упражнений — их можно скачать заново.</string>
+    <string name="backup_section_file">Файл</string>
+    <string name="backup_export">Сохранить в файл</string>
+    <string name="backup_import">Восстановить из файла</string>
+    <string name="backup_file_hint">Архив ZIP можно сохранить в «Загрузки», на флешку или в любое облако через системный диалог.</string>
+    <string name="backup_saved">Бэкап сохранён.</string>
+    <string name="backup_size_mb">%1$s МБ</string>
+    <string name="backup_restore_title">Восстановить данные?</string>
+    <string name="backup_restore_text">Все текущие данные будут заменены данными из бэкапа. Приложение перезапустится.</string>
+    <string name="backup_restore_ok">Восстановить</string>
+    <string name="backup_busy_export">Сохраняю бэкап…</string>
+    <string name="backup_busy_import">Проверяю архив…</string>
+    <string name="backup_err_not_iron">Это не бэкап IRON.</string>
+    <string name="backup_err_newer">Бэкап сделан в более новой версии приложения. Сначала обновите IRON.</string>
+    <string name="backup_err_broken">Архив повреждён или неполный.</string>
+    <string name="backup_err_io">Не удалось прочитать или записать файл.</string>
+
+    <string name="drive_section">Google Диск</string>
+    <string name="drive_intro">Копии хранятся в скрытой папке приложения на вашем Google Диске: их видит только IRON, место считается в квоте Диска.</string>
+    <string name="drive_connect">Подключить Google Диск</string>
+    <string name="drive_setup_hint">Для работы нужна разовая настройка в Google Cloud (OAuth-клиент с SHA-1 ключа подписи) — пошагово описано в README, раздел «Google Диск».</string>
+    <string name="drive_connected">Google Диск подключён</string>
+    <string name="drive_connected_note">Google Диск подключён.</string>
+    <string name="drive_last">Последний бэкап на Диск</string>
+    <string name="drive_never">Ещё не было</string>
+    <string name="drive_auto">Ежедневно по Wi-Fi</string>
+    <string name="drive_auto_sub">Автоматически раз в сутки, когда есть Wi-Fi и заряд не на исходе</string>
+    <string name="drive_backup_now">Сделать сейчас</string>
+    <string name="drive_refresh">Обновить</string>
+    <string name="drive_copies">Копии на Диске (хранятся последние %1$d)</string>
+    <string name="drive_no_copies">Копий пока нет.</string>
+    <string name="drive_restore">Восстановить</string>
+    <string name="drive_restore_text">Все текущие данные будут заменены копией от %1$s. Приложение перезапустится.</string>
+    <string name="drive_backup_done">Бэкап загружен на Google Диск.</string>
+    <string name="drive_disconnect">Отключить Диск</string>
+    <string name="drive_disconnect_text">Автобэкап выключится. Копии на Диске останутся. Полностью отозвать доступ можно в настройках аккаунта Google → «Сторонние приложения».</string>
+    <string name="drive_disconnected_note">Google Диск отключён.</string>
+    <string name="drive_busy_connect">Подключаю Google Диск…</string>
+    <string name="drive_busy_upload">Загружаю бэкап на Диск…</string>
+    <string name="drive_busy_list">Обновляю список копий…</string>
+    <string name="drive_busy_restore">Скачиваю копию…</string>
+    <string name="drive_err_not_configured">Приложение не зарегистрировано в Google Cloud: нет OAuth-клиента для этого имени пакета и SHA-1. См. README, раздел «Google Диск».</string>
+    <string name="drive_err_api_disabled">В проекте Google Cloud не включён Google Drive API. См. README, раздел «Google Диск».</string>
+    <string name="drive_err_auth">Нет доступа к Google Диску. Подключите Диск ещё раз.</string>
+    <string name="drive_err_cancelled">Вход в Google отменён.</string>
+    <string name="drive_err_network">Нет связи с Google Диском. Проверьте интернет.</string>
+    <string name="drive_err_storage">На Google Диске закончилось место.</string>
+    <string name="drive_err_other">Google Диск ответил ошибкой. Попробуйте позже.</string>
+
+    <string name="notif_channel_backup">Бэкап</string>
+    <string name="backup_notif_signin_title">Бэкап на Google Диск не выполнен</string>
+    <string name="backup_notif_signin_text">Нужно снова войти в Google. Откройте IRON → Бэкап.</string>
+</resources>

@@ -7,6 +7,7 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
+import com.iron.fitness.core.backup.RestoreApplier
 import com.iron.fitness.core.notifications.NotificationChannels
 import com.iron.fitness.core.util.RU
 import com.iron.fitness.feature.exercises.images.ExerciseImages
@@ -28,6 +29,8 @@ class IronApp : Application(), Configuration.Provider, ImageLoaderFactory {
             .build()
 
     override fun onCreate() {
+        // Восстановление из бэкапа применяется до того, как кто-то откроет базу.
+        RestoreApplier.applyPending(this)
         super.onCreate()
         Locale.setDefault(RU)
         NotificationChannels.createAll(this)

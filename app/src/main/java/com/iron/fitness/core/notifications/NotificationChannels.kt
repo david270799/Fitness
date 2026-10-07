@@ -11,6 +11,7 @@ object NotificationChannels {
     const val TIMER = "timer"
     const val CHALLENGES = "challenges"
     const val REMINDERS = "reminders"
+    const val BACKUP = "backup"
 
     fun createAll(context: Context) {
         val ru = context.withRussianLocale()
@@ -33,5 +34,7 @@ object NotificationChannels {
     }
 
     /** Каналы следующих этапов добавляются сюда. */
-    private fun extraChannels(context: Context): List<NotificationChannel> = emptyList()
+    private fun extraChannels(context: Context): List<NotificationChannel> = listOf(
+        NotificationChannel(BACKUP, context.getString(R.string.notif_channel_backup), NotificationManager.IMPORTANCE_DEFAULT),
+    )
 }

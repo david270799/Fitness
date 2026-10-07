@@ -16,6 +16,7 @@ import com.iron.fitness.feature.assistant.WeeklyReviewScreen
 import com.iron.fitness.feature.inbody.InBodyDetailScreen
 import com.iron.fitness.feature.inbody.InBodyListScreen
 import com.iron.fitness.feature.inbody.InBodyNewScreen
+import com.iron.fitness.feature.backup.BackupScreen
 import com.iron.fitness.feature.body.BodyScreen
 import com.iron.fitness.feature.daily.DailyScreen
 import com.iron.fitness.feature.exercises.ui.ExerciseDetailScreen
@@ -64,6 +65,7 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
 
     composable(Routes.SETTINGS) { SettingsScreen(onBack = back, navigate = go) }
     composable(Routes.ABOUT) { AboutScreen(onBack = back) }
+    composable(Routes.BACKUP) { BackupScreen(onBack = back) }
     composable(Routes.ASSISTANT) { AssistantScreen(onBack = back, navigate = go) }
 
     composable(

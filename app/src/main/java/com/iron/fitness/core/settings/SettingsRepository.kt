@@ -118,17 +118,24 @@ class SettingsRepository @Inject constructor(
     }
     suspend fun setLastBackup(at: Long) = edit { it[Keys.LAST_BACKUP] = at }
 
+    /** Состояние этого устройства: в бэкап не входит и при восстановлении не меняется. */
+    private val deviceOnly = setOf(Keys.ONBOARDING_DONE.name, Keys.AUTO_BACKUP.name, Keys.DRIVE_ACCOUNT.name, Keys.LAST_BACKUP.name)
+
     /** Все настройки как пары ключ→строка (для бэкапа; секретов здесь нет). */
     suspend fun exportRaw(): Map<String, String> {
         val prefs = context.settingsStore.data.first()
-        return prefs.asMap().entries.associate { (k, v) -> k.name to "${typeTag(v)}:$v" }
+        return prefs.asMap().entries
+            .filter { it.key.name !in deviceOnly }
+            .associate { (k, v) -> k.name to "${typeTag(v)}:$v" }
     }
 
     /** Восстановление из бэкапа. Неизвестные ключи и типы пропускаются. */
     suspend fun importRaw(values: Map<String, String>) {
         context.settingsStore.edit { prefs ->
-            prefs.clear()
+            @Suppress("UNCHECKED_CAST")
+            prefs.asMap().keys.filter { it.name !in deviceOnly }.forEach { prefs.remove(it as Preferences.Key<Any>) }
             for ((name, raw) in values) {
+                if (name in deviceOnly) continue
                 val tag = raw.substringBefore(':')
                 val v = raw.substringAfter(':')
                 when (tag) {
