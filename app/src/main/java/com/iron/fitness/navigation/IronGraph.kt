@@ -17,6 +17,9 @@ import com.iron.fitness.feature.more.MoreScreen
 import com.iron.fitness.feature.settings.SettingsScreen
 import com.iron.fitness.feature.today.TodayScreen
 import com.iron.fitness.feature.workouts.WorkoutsScreen
+import com.iron.fitness.feature.cardio.run.IntervalRunScreen
+import com.iron.fitness.feature.cardio.ui.CardioLogScreen
+import com.iron.fitness.feature.cardio.ui.IntervalEditorScreen
 import com.iron.fitness.feature.workouts.history.HistoryScreen
 import com.iron.fitness.feature.workouts.history.WorkoutDetailScreen
 import com.iron.fitness.feature.workouts.routine.RoutineEditorScreen
@@ -127,6 +130,7 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         WorkoutDetailScreen(
             onBack = back,
             onEdit = { go(Routes.workoutSession(it, edit = true)) },
+            onEditCardio = { go(Routes.cardioLog(it)) },
             onOpenExercise = { go(Routes.exercise(it)) },
         )
     }
@@ -146,6 +150,27 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         )
     }
     composable(Routes.TOOLS) { ToolsScreen(onBack = back) }
+
+    // ---------- Кардио и интервалы ----------
+    composable(Routes.INTERVAL_RUN) { IntervalRunScreen(onBack = back) }
+    composable(
+        Routes.INTERVAL_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) { entry ->
+        val picked = entry.pickedExercises()
+        IntervalEditorScreen(
+            onBack = back,
+            onPickExercise = { go(Routes.library(mode = "pick")) },
+            pickedExercises = picked,
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(
+        Routes.CARDIO_LOG_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) {
+        CardioLogScreen(onBack = back)
+    }
 }
 
 /** Результат выбора упражнений из библиотеки (кладётся в SavedStateHandle этого экрана). */

@@ -210,6 +210,14 @@ private fun WorkoutSection(settings: AppSettings, viewModel: SettingsViewModel) 
             onCheckedChange = viewModel::setVibration,
             icon = IronIcons.Vibrate,
         )
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_voice),
+            subtitle = stringResource(R.string.settings_voice_sub),
+            checked = settings.voiceHintsEnabled,
+            onCheckedChange = viewModel::setVoiceHints,
+            icon = IronIcons.Mic,
+        )
     }
     IronCard {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {

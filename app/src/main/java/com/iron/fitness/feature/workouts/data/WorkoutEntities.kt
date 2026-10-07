@@ -65,6 +65,8 @@ data class WorkoutEntity(
     // Кардио
     val cardioType: String? = null,
     val distanceKm: Double? = null,
+    /** Интенсивность кардио (LIGHT/MODERATE/VIGOROUS). */
+    val intensity: String? = null,
     // Интервалы и растяжка
     val programId: Long? = null,
     val stretchPhase: String? = null,

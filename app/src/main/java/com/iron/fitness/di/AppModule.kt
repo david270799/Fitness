@@ -3,6 +3,8 @@ package com.iron.fitness.di
 import android.content.Context
 import androidx.room.Room
 import com.iron.fitness.core.db.IronDatabase
+import com.iron.fitness.core.db.IronMigrations
+import com.iron.fitness.feature.cardio.data.IntervalDao
 import com.iron.fitness.feature.exercises.data.ExerciseDao
 import com.iron.fitness.feature.workouts.data.WorkoutDao
 import dagger.Module
@@ -23,8 +25,9 @@ object AppModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): IronDatabase =
         Room.databaseBuilder(context, IronDatabase::class.java, IronDatabase.NAME)
-            // До первого релиза схема меняется от этапа к этапу; после релиза — только миграции.
-            .fallbackToDestructiveMigration(dropAllTables = true)
+            // Начиная с версии 2 схема меняется только миграциями — записи тренировок сохраняются.
+            .addMigrations(*IronMigrations.ALL)
+            .fallbackToDestructiveMigrationFrom(dropAllTables = true, 1)
             .build()
 
     @Provides
@@ -32,6 +35,9 @@ object AppModule {
 
     @Provides
     fun provideWorkoutDao(db: IronDatabase): WorkoutDao = db.workoutDao()
+
+    @Provides
+    fun provideIntervalDao(db: IronDatabase): IntervalDao = db.intervalDao()
 
     @Provides
     @Singleton

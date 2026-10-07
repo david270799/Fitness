@@ -16,7 +16,6 @@
     <string name="workouts_tab_strength">Силовые</string>
     <string name="workouts_tab_cardio">Кардио</string>
     <string name="workouts_tab_stretching">Растяжка</string>
-    <string name="workouts_cardio_soon">Кардио и конструктор интервалов появятся на следующем этапе.</string>
     <string name="workouts_stretching_soon">Растяжка появится на одном из следующих этапов.</string>
     <string name="workouts_start_empty">Пустая тренировка</string>
     <string name="workouts_routines">Шаблоны</string>
@@ -191,6 +190,8 @@
     <string name="settings_keep_screen_sub">Во время тренировки</string>
     <string name="settings_sound">Звук таймеров</string>
     <string name="settings_vibration">Вибрация таймеров</string>
+    <string name="settings_voice">Голосовые подсказки</string>
+    <string name="settings_voice_sub">«Следующее: …» в интервальных тренировках (синтез речи телефона)</string>
     <string name="settings_bar_weight">Вес грифа</string>
     <string name="settings_plates">Доступные блины, кг</string>
 

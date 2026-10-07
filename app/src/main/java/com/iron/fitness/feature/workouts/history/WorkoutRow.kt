@@ -44,6 +44,7 @@ fun WorkoutRow(row: WorkoutSummaryRow, onClick: () -> Unit, modifier: Modifier =
                         add(pluralStringResource(R.plurals.sets, row.setCount, row.setCount))
                         if (w.volumeKg > 0) add(stringResource(R.string.value_kg, Fmt.grouped(w.volumeKg)))
                     }
+                    w.distanceKm?.let { add(Fmt.num(it, 2) + " " + stringResource(R.string.unit_km)) }
                     w.caloriesKcal?.takeIf { it > 0 }?.let { add(stringResource(R.string.approx_kcal, it.toInt())) }
                 }
                 Text(parts.joinToString(" · "), style = Iron.numbers.tiny, color = Iron.colors.textSecondary, maxLines = 1, overflow = TextOverflow.Ellipsis)

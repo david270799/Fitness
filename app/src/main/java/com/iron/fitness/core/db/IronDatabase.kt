@@ -3,6 +3,8 @@ package com.iron.fitness.core.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.iron.fitness.feature.cardio.data.IntervalDao
+import com.iron.fitness.feature.cardio.data.IntervalProgramEntity
 import com.iron.fitness.feature.exercises.data.ExerciseDao
 import com.iron.fitness.feature.exercises.data.ExerciseEntity
 import com.iron.fitness.feature.workouts.data.RoutineEntity
@@ -20,6 +22,7 @@ import com.iron.fitness.feature.workouts.data.WorkoutSetEntity
         WorkoutEntity::class,
         WorkoutExerciseEntity::class,
         WorkoutSetEntity::class,
+        IntervalProgramEntity::class,
     ],
     version = IronDatabase.VERSION,
     exportSchema = true,
@@ -28,9 +31,10 @@ import com.iron.fitness.feature.workouts.data.WorkoutSetEntity
 abstract class IronDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
+    abstract fun intervalDao(): IntervalDao
 
     companion object {
-        const val VERSION = 2
+        const val VERSION = 3
         const val NAME = "iron.db"
     }
 }

@@ -102,7 +102,9 @@ fun TodayScreen(
                 Text(Fmt.dateTime(last.startedAt), style = MaterialTheme.typography.labelSmall, color = Iron.colors.textSecondary)
                 Text(last.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(
-                    Fmt.durationWords(last.durationSec) + " · " + stringResource(R.string.value_kg, Fmt.grouped(last.volumeKg)) +
+                    Fmt.durationWords(last.durationSec) +
+                        (if (last.volumeKg > 0) " · " + stringResource(R.string.value_kg, Fmt.grouped(last.volumeKg)) else "") +
+                        (last.distanceKm?.let { " · " + Fmt.num(it, 2) + " " + stringResource(R.string.unit_km) } ?: "") +
                         (last.caloriesKcal?.let { " · " + stringResource(R.string.approx_kcal, it.toInt()) } ?: ""),
                     style = Iron.numbers.tiny,
                     color = Iron.colors.textSecondary,

@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * Foreground Service таймеров: отдых между подходами (и интервальные программы — см. [ProgramRunnerHost]).
+ * Foreground Service таймеров: отдых между подходами и интервальные программы / кардио ([ProgramRunnerHost]).
  * Держит частичный WakeLock, пока идёт отсчёт, поэтому сигнал приходит и при выключенном экране.
  */
 @AndroidEntryPoint
@@ -63,25 +63,24 @@ class TimerService : LifecycleService() {
     fun refresh() {
         val program = programHost.notification(this)
         val rest = restTimer.state.value
-        when {
-            program != null -> {
-                goForeground(program)
-                acquireWakeLock(3 * 60 * 60 * 1000L)
+        if (program != null) {
+            goForeground(program)
+            acquireWakeLock(3 * 60 * 60 * 1000L)
+            programHost.ensureLoop(this)
+        } else if (rest != null) {
+            goForeground(restNotification(rest))
+            acquireWakeLock(rest.remainingMs() + 60_000)
+        }
+        if (rest != null) startRestLoop()
+        if (program == null && rest == null) {
+            restJob?.cancel()
+            programHost.onIdle()
+            releaseWakeLock()
+            if (inForeground) {
+                ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+                inForeground = false
             }
-            rest != null -> {
-                goForeground(restNotification(rest))
-                acquireWakeLock(rest.remainingMs() + 60_000)
-                startRestLoop()
-            }
-            else -> {
-                restJob?.cancel()
-                releaseWakeLock()
-                if (inForeground) {
-                    ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
-                    inForeground = false
-                }
-                stopSelf()
-            }
+            stopSelf()
         }
     }
 
@@ -175,6 +174,9 @@ class TimerService : LifecycleService() {
         const val ACTION_REST_START = "com.iron.fitness.timer.REST_START"
         const val ACTION_REST_ADD = "com.iron.fitness.timer.REST_ADD"
         const val ACTION_REST_SKIP = "com.iron.fitness.timer.REST_SKIP"
+        const val ACTION_PROGRAM_TOGGLE = "com.iron.fitness.timer.PROGRAM_TOGGLE"
+        const val ACTION_PROGRAM_NEXT = "com.iron.fitness.timer.PROGRAM_NEXT"
+        const val ACTION_PROGRAM_FINISH = "com.iron.fitness.timer.PROGRAM_FINISH"
         const val EXTRA_SECONDS = "seconds"
         const val EXTRA_FOREGROUND = "foreground"
 

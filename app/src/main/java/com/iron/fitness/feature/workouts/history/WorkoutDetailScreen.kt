@@ -109,6 +109,7 @@ class WorkoutDetailViewModel @Inject constructor(
 fun WorkoutDetailScreen(
     onBack: () -> Unit,
     onEdit: (Long) -> Unit,
+    onEditCardio: (Long) -> Unit,
     onOpenExercise: (String) -> Unit,
     viewModel: WorkoutDetailViewModel = hiltViewModel(),
 ) {
@@ -133,6 +134,9 @@ fun WorkoutDetailScreen(
         actions = {
             if (full != null && full.workout.type == WorkoutType.STRENGTH) {
                 IronIconButton(IronIcons.Edit, stringResource(R.string.action_edit), { onEdit(full.workout.id) })
+            }
+            if (full != null && full.workout.type == WorkoutType.CARDIO) {
+                IronIconButton(IronIcons.Edit, stringResource(R.string.action_edit), { onEditCardio(full.workout.id) })
             }
             Box {
                 IronIconButton(IronIcons.MoreVert, stringResource(R.string.action_more), { menu = true })
@@ -165,7 +169,11 @@ fun WorkoutDetailScreen(
                     w.note?.let { Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 6.dp)) }
                 }
             }
-            state.summary?.let { s -> item(key = "grid") { SummaryGrid(s) } }
+            if (w.type == WorkoutType.STRENGTH) {
+                state.summary?.let { s -> item(key = "grid") { SummaryGrid(s) } }
+            } else {
+                item(key = "cardio_grid") { CardioGrid(w) }
+            }
             items(full.exercises.sortedBy { it.exercise.position }, key = { it.exercise.id }) { item ->
                 val ex = state.exercises[item.exercise.exerciseId]
                 val recordType = ex?.recordType ?: RecordType.WEIGHT_REPS
@@ -212,5 +220,35 @@ fun WorkoutDetailScreen(
             },
             onDismiss = { confirmDelete = false },
         )
+    }
+}
+
+/** Плитки для кардио и интервалов: время, дистанция, темп, калории. */
+@Composable
+private fun CardioGrid(w: com.iron.fitness.feature.workouts.data.WorkoutEntity) {
+    val type = com.iron.fitness.feature.cardio.data.CardioType.of(w.cardioType)
+    val tiles = buildList<Pair<String, String>> {
+        add(stringResource(R.string.summary_duration) to Fmt.duration(w.durationSec))
+        w.distanceKm?.let { add(stringResource(R.string.cardio_distance) to Fmt.num(it, 2)) }
+        com.iron.fitness.feature.cardio.ui.paceText(type, w.durationSec, w.distanceKm)?.let { add(stringResource(R.string.cardio_pace_title) to it) }
+        w.caloriesKcal?.let { add(stringResource(R.string.summary_calories) to "≈ " + it.toInt()) }
+        w.intensity?.let { name ->
+            runCatching { com.iron.fitness.feature.cardio.data.Intensity.valueOf(name) }.getOrNull()?.let {
+                add(stringResource(R.string.cardio_intensity) to stringResource(it.label))
+            }
+        }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        tiles.chunked(2).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                row.forEach { (label, value) ->
+                    IronCard(modifier = Modifier.weight(1f), contentPadding = PaddingValues(12.dp)) {
+                        Text(label.uppercase(), style = MaterialTheme.typography.labelSmall, color = Iron.colors.textSecondary)
+                        Text(value, style = Iron.numbers.medium, maxLines = 1)
+                    }
+                }
+                if (row.size == 1) Spacer(Modifier.weight(1f))
+            }
+        }
     }
 }

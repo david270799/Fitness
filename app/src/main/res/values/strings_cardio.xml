@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Виды кардио -->
+    <string name="cardio_run">Бег</string>
+    <string name="cardio_walk">Ходьба</string>
+    <string name="cardio_bike">Велосипед</string>
+    <string name="cardio_row">Гребля</string>
+    <string name="cardio_elliptical">Эллипс</string>
+    <string name="cardio_swim">Плавание</string>
+    <string name="cardio_rope">Скакалка</string>
+    <string name="cardio_stairs">Степпер / лестница</string>
+    <string name="cardio_other">Другое</string>
+
+    <string name="intensity_light">Лёгкая</string>
+    <string name="intensity_moderate">Средняя</string>
+    <string name="intensity_vigorous">Высокая</string>
+    <string name="intensity_max">Максимум</string>
+
+    <!-- Вкладка «Кардио» -->
+    <string name="cardio_stopwatch">Секундомер</string>
+    <string name="cardio_log">Записать кардио</string>
+    <string name="cardio_edit">Кардио</string>
+    <string name="cardio_pick_type">Что делаем?</string>
+    <string name="cardio_recent">Кардио и интервалы</string>
+    <string name="cardio_type">Вид</string>
+    <string name="cardio_date">Дата</string>
+    <string name="cardio_time">Время</string>
+    <string name="cardio_time_hint">Начало в формате ЧЧ:ММ</string>
+    <string name="cardio_minutes">Длительность, мин</string>
+    <string name="cardio_distance">Дистанция, км</string>
+    <string name="cardio_intensity">Интенсивность</string>
+    <string name="cardio_kcal_note">≈ оценка по MET, длительности и вашему весу</string>
+    <string name="cardio_pace">Темп: %1$s мин/км</string>
+    <string name="cardio_speed">Скорость: %1$s км/ч</string>
+    <string name="cardio_pace_title">Темп</string>
+
+    <!-- Интервальные программы -->
+    <string name="intervals_my">Мои программы</string>
+    <string name="intervals_new">Новая программа</string>
+    <string name="intervals_edit">Программа</string>
+    <string name="intervals_empty">Своих программ пока нет. Начните с шаблона или соберите свою.</string>
+    <string name="intervals_templates">Шаблоны</string>
+    <string name="intervals_to_mine">Скопировать в мои</string>
+    <string name="intervals_delete_title">Удалить программу?</string>
+    <string name="intervals_name_hint">Например: Табата дома</string>
+    <string name="intervals_work_intensity">Интенсивность работы (для калорий)</string>
+    <string name="intervals_blocks">Блоки</string>
+    <string name="intervals_add_block">Добавить блок</string>
+    <string name="intervals_empty_error">Добавьте хотя бы один блок с временем больше нуля</string>
+    <string name="intervals_duration">Длительность</string>
+    <string name="intervals_duration_hint">Например: 0:30, 1:30 или 45 (секунды)</string>
+    <string name="intervals_label_hint">Подпись (например, Бёрпи)</string>
+    <string name="intervals_pick_exercise">Выбрать упражнение</string>
+    <string name="intervals_linked_exercise">Связано с упражнением из библиотеки — в таймере будет картинка</string>
+    <string name="intervals_repeat">Повтор</string>
+    <string name="intervals_skip_last_rest">Без отдыха после последнего круга</string>
+    <string name="intervals_total">Всего</string>
+
+    <string name="block_warmup">Разминка</string>
+    <string name="block_work">Работа</string>
+    <string name="block_rest">Отдых</string>
+    <string name="block_cooldown">Заминка</string>
+    <string name="block_repeat">Повтор</string>
+
+    <!-- Шаблоны -->
+    <string name="tpl_tabata">Табата</string>
+    <string name="tpl_tabata_desc">8 кругов: 20 с работы, 10 с отдыха</string>
+    <string name="tpl_hiit">HIIT 30/30</string>
+    <string name="tpl_hiit_desc">10 кругов по 30 с работы и отдыха</string>
+    <string name="tpl_run">Беговые интервалы</string>
+    <string name="tpl_run_desc">6 × (1 мин быстро, 2 мин трусцой)</string>
+    <string name="tpl_emom">EMOM 10 минут</string>
+    <string name="tpl_emom_desc">Каждую минуту — подход, остаток минуты — отдых</string>
+    <string name="tpl_circuit">Круговая без оборудования</string>
+    <string name="tpl_circuit_desc">3 круга: приседания, отжимания, выпады, планка</string>
+    <string name="tpl_label_warmup">Суставная разминка</string>
+    <string name="tpl_label_cooldown">Спокойное дыхание</string>
+    <string name="tpl_label_easy_run">Лёгкий бег</string>
+    <string name="tpl_label_fast">Быстро</string>
+    <string name="tpl_label_jog">Трусцой</string>
+    <string name="tpl_label_walk">Ходьба</string>
+    <string name="tpl_label_emom">Подход в начале минуты</string>
+    <string name="tpl_label_squats">Приседания</string>
+    <string name="tpl_label_pushups">Отжимания</string>
+    <string name="tpl_label_lunges">Выпады</string>
+    <string name="tpl_label_plank">Планка</string>
+
+    <!-- Таймер программы -->
+    <string name="run_active">Идёт тренировка</string>
+    <string name="run_paused">Пауза</string>
+    <string name="run_finished">Завершено</string>
+    <string name="run_pause">Пауза</string>
+    <string name="run_resume">Продолжить</string>
+    <string name="run_skip">Далее</string>
+    <string name="run_stop">Стоп</string>
+    <string name="run_finish">Завершить</string>
+    <string name="run_round">Круг %1$d / %2$d</string>
+    <string name="run_next">Далее: %1$s</string>
+    <string name="run_next_label">Далее</string>
+    <string name="run_last_block">Последний блок</string>
+    <string name="run_elapsed">прошло %1$s</string>
+    <string name="run_left">осталось %1$s</string>
+    <string name="run_tts_next">Следующее: %1$s</string>
+    <string name="run_tts_done">Тренировка завершена</string>
+    <string name="run_stop_title">Завершить тренировку?</string>
+    <string name="run_stop_text">Можно сохранить сделанное в журнал или выйти без сохранения.</string>
+    <string name="run_stop_save">Сохранить</string>
+    <string name="run_stop_discard">Не сохранять</string>
+    <string name="run_done_title">Готово</string>
+    <string name="run_saved_to_journal">Тренировка сохранена в журнал.</string>
+    <string name="run_busy_title">Уже идёт тренировка</string>
+    <string name="run_busy_text">Сначала завершите текущую программу или секундомер.</string>
+</resources>
