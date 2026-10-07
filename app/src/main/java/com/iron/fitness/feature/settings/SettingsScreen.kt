@@ -40,6 +40,10 @@ import com.iron.fitness.core.ui.IronIcons
 import com.iron.fitness.core.ui.components.FlatProgressBar
 import com.iron.fitness.core.ui.components.GhostButton
 import com.iron.fitness.core.ui.components.IronCard
+import com.iron.fitness.core.ui.components.IronChip
+import com.iron.fitness.core.ui.components.IronDivider
+import com.iron.fitness.core.ui.components.IronIconButton
+import com.iron.fitness.core.ui.components.SwitchRow
 import com.iron.fitness.core.ui.components.PrimaryButton
 import com.iron.fitness.core.ui.components.SecondaryButton
 import com.iron.fitness.core.util.Fmt
@@ -68,6 +72,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             AppearanceSection(settings, viewModel)
+            WorkoutSection(settings, viewModel)
             ImagesSection(viewModel)
             Spacer(Modifier.height(24.dp))
         }
@@ -153,6 +158,82 @@ private fun ThemeTile(
             color = palette.text,
             maxLines = 1,
         )
+    }
+}
+
+/** Все блины, которые можно отметить как доступные. */
+private val ALL_PLATES = listOf(50.0, 25.0, 20.0, 15.0, 10.0, 5.0, 2.5, 2.0, 1.25, 1.0, 0.5, 0.25)
+private val BAR_WEIGHTS = listOf(20.0, 15.0, 10.0, 7.0)
+
+@Composable
+private fun WorkoutSection(settings: AppSettings, viewModel: SettingsViewModel) {
+    SectionTitle(stringResource(R.string.settings_section_workouts))
+    IronCard(contentPadding = PaddingValues(0.dp)) {
+        ListRow(
+            title = stringResource(R.string.settings_default_rest),
+            subtitle = stringResource(R.string.settings_default_rest_sub),
+            icon = IronIcons.Timer,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IronIconButton(IronIcons.Remove, stringResource(R.string.timer_minus_15), { viewModel.setDefaultRest(settings.defaultRestSeconds - 15) })
+                Text(Fmt.duration(settings.defaultRestSeconds), style = Iron.numbers.small)
+                IronIconButton(IronIcons.Add, stringResource(R.string.timer_plus_15), { viewModel.setDefaultRest(settings.defaultRestSeconds + 15) })
+            }
+        }
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_auto_rest),
+            subtitle = stringResource(R.string.settings_auto_rest_sub),
+            checked = settings.autoStartRestTimer,
+            onCheckedChange = viewModel::setAutoRest,
+            icon = IronIcons.Alarm,
+        )
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_keep_screen),
+            subtitle = stringResource(R.string.settings_keep_screen_sub),
+            checked = settings.keepScreenOn,
+            onCheckedChange = viewModel::setKeepScreenOn,
+            icon = IronIcons.Sun,
+        )
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_sound),
+            checked = settings.soundEnabled,
+            onCheckedChange = viewModel::setSound,
+            icon = IronIcons.Volume,
+        )
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_vibration),
+            checked = settings.vibrationEnabled,
+            onCheckedChange = viewModel::setVibration,
+            icon = IronIcons.Vibrate,
+        )
+    }
+    IronCard {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.settings_bar_weight), style = MaterialTheme.typography.titleSmall)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                BAR_WEIGHTS.forEach { w ->
+                    IronChip(
+                        text = stringResource(R.string.value_kg, Fmt.num(w)),
+                        selected = settings.barWeightKg == w,
+                        onClick = { viewModel.setBarWeight(w) },
+                    )
+                }
+            }
+            Text(stringResource(R.string.settings_plates), style = MaterialTheme.typography.titleSmall)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                ALL_PLATES.forEach { p ->
+                    IronChip(
+                        text = Fmt.num(p),
+                        selected = p in settings.plates,
+                        onClick = { viewModel.togglePlate(p) },
+                    )
+                }
+            }
+        }
     }
 }
 

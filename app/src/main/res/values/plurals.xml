@@ -90,4 +90,10 @@
         <item quantity="many">%d изображений</item>
         <item quantity="other">%d изображения</item>
     </plurals>
+    <plurals name="weeks_in_row">
+        <item quantity="one">%d неделя подряд</item>
+        <item quantity="few">%d недели подряд</item>
+        <item quantity="many">%d недель подряд</item>
+        <item quantity="other">%d недели подряд</item>
+    </plurals>
 </resources>

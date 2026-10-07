@@ -61,6 +61,18 @@ class SettingsViewModel @Inject constructor(
     fun setTheme(id: String) = launch { repo.setTheme(id) }
     fun setThemeMode(mode: ThemeMode) = launch { repo.setThemeMode(mode) }
 
+    fun setDefaultRest(seconds: Int) = launch { repo.setDefaultRest(seconds) }
+    fun setAutoRest(value: Boolean) = launch { repo.setAutoRest(value) }
+    fun setKeepScreenOn(value: Boolean) = launch { repo.setKeepScreenOn(value) }
+    fun setSound(value: Boolean) = launch { repo.setSound(value) }
+    fun setVibration(value: Boolean) = launch { repo.setVibration(value) }
+    fun setBarWeight(kg: Double) = launch { repo.setBarWeight(kg) }
+    fun togglePlate(kg: Double) = launch {
+        val current = settings.value.plates
+        val next = if (kg in current) current - kg else current + kg
+        if (next.isNotEmpty()) repo.setPlates(next)
+    }
+
     fun downloadAllImages() = images.startDownloadAll()
     fun cancelImageDownload() = images.cancel()
     fun clearImageCache() = launch {

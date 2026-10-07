@@ -30,7 +30,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.displayMedium, color = Iron.colors.accent)
+            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.displayMedium, color = Iron.colors.accentText)
             Text(
                 stringResource(R.string.about_version, BuildConfig.VERSION_NAME),
                 style = Iron.numbers.small,

@@ -218,7 +218,7 @@ fun GhostButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    color: Color = Iron.colors.accent,
+    color: Color = Iron.colors.accentText,
     enabled: Boolean = true,
 ) {
     TextButton(onClick = onClick, modifier = modifier, enabled = enabled, shape = ButtonShape) {
@@ -382,7 +382,7 @@ fun ConfirmDialog(
             GhostButton(
                 text = confirmText,
                 onClick = onConfirm,
-                color = if (destructive) Iron.colors.error else Iron.colors.accent,
+                color = if (destructive) Iron.colors.error else Iron.colors.accentText,
             )
         },
         dismissButton = {

@@ -85,6 +85,7 @@
     <string name="more_stats_sub">Графики, журнал, экспорт CSV</string>
     <string name="more_tools">Калькуляторы</string>
     <string name="more_tools_sub">Блины на штангу, 1ПМ</string>
+    <string name="more_history_sub">Все тренировки, правка и удаление</string>
 
     <!-- О приложении -->
     <string name="about_title">О приложении</string>

@@ -34,6 +34,12 @@ object Fmt {
 
     fun num(value: Float, maxDecimals: Int = 2): String = num(value.toDouble(), maxDecimals)
 
+    /** Целое с разделением разрядов: 12450 → «12 450». */
+    fun grouped(value: Double): String = String.format(RU, "%,d", value.roundToLong())
+
+    /** Вес для полей ввода: null → «», 80.0 → «80», 82.5 → «82,5». */
+    fun weightInput(value: Double?): String = value?.let { num(it, 2) } ?: ""
+
     fun signed(value: Double, maxDecimals: Int = 1): String {
         val s = num(abs(value), maxDecimals)
         return when {

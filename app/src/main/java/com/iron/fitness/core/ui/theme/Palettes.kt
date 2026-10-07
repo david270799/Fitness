@@ -27,6 +27,8 @@ data class IronPalette(
     val textSecondary: Color,
     /** Акцент: кнопки, прогресс, выделение. */
     val accent: Color,
+    /** Акцент для текста и иконок на фоне (светлее, если основной акцент тёмный). */
+    val accentText: Color = accent,
     /** Текст и иконки поверх акцента. */
     val onAccent: Color,
     val error: Color,
@@ -81,6 +83,7 @@ object IronPalettes {
         text = Color(0xFFE6EAF0),
         textSecondary = Color(0xFF9AA3B2),
         accent = Color(0xFF8FA8C8),
+        accentText = Color(0xFFA9C0DD),
         onAccent = Color(0xFF10151C),
         error = Color(0xFFE5534B),
         success = Color(0xFF57C78A),
@@ -98,6 +101,7 @@ object IronPalettes {
         text = Color(0xFFF5F0F0),
         textSecondary = Color(0xFFA59696),
         accent = Color(0xFFB3121B),
+        accentText = Color(0xFFE5484D),
         onAccent = Color(0xFFFFFFFF),
         error = Color(0xFFFF8A65),
         success = Color(0xFF4CC38A),
@@ -130,7 +134,7 @@ object IronPalettes {
         surfaceHigh = Color(0xFFF2F4F7),
         border = Color(0xFFCDD2DA),
         text = Color(0xFF0B0D10),
-        textSecondary = Color(0xFF5A6270),
+        textSecondary = Color(0xFF4F5866),
         accent = Color(0xFF12306B),
         onAccent = Color(0xFFFFFFFF),
         error = Color(0xFFC62828),

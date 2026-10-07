@@ -229,7 +229,7 @@ private fun MusclesBlock(e: ExerciseEntity) {
     IronCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
         if (primary.isNotEmpty()) {
             Text(stringResource(R.string.exercise_primary_muscles).uppercase(), style = MaterialTheme.typography.labelSmall, color = Iron.colors.textSecondary)
-            Text(primary.map { stringResource(it.label) }.joinToString(", "), style = MaterialTheme.typography.titleMedium, color = Iron.colors.accent)
+            Text(primary.map { stringResource(it.label) }.joinToString(", "), style = MaterialTheme.typography.titleMedium, color = Iron.colors.accentText)
         }
         if (secondary.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
@@ -248,7 +248,7 @@ private fun TechniqueBlock(steps: List<String>) {
                 Text(
                     "%02d".format(index + 1),
                     style = Iron.numbers.small,
-                    color = Iron.colors.accent,
+                    color = Iron.colors.accentText,
                     modifier = Modifier.width(36.dp),
                 )
                 Text(step, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))

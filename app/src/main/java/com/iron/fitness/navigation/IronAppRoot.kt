@@ -115,7 +115,7 @@ private fun IronBottomBar(current: TopLevel, onSelect: (TopLevel) -> Unit) {
                     IronIcon(
                         item.icon,
                         contentDescription = null,
-                        tint = if (selected) Iron.colors.accent else Iron.colors.textSecondary,
+                        tint = if (selected) Iron.colors.accentText else Iron.colors.textSecondary,
                     )
                 },
                 label = {

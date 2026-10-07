@@ -17,6 +17,17 @@ import com.iron.fitness.feature.more.MoreScreen
 import com.iron.fitness.feature.settings.SettingsScreen
 import com.iron.fitness.feature.today.TodayScreen
 import com.iron.fitness.feature.workouts.WorkoutsScreen
+import com.iron.fitness.feature.workouts.history.HistoryScreen
+import com.iron.fitness.feature.workouts.history.WorkoutDetailScreen
+import com.iron.fitness.feature.workouts.routine.RoutineEditorScreen
+import com.iron.fitness.feature.workouts.session.SessionScreen
+import com.iron.fitness.feature.workouts.summary.WorkoutSummaryScreen
+import com.iron.fitness.feature.workouts.tools.ToolsScreen
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavBackStackEntry
 
 fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
     val back: () -> Unit = { nav.popBackStack() }
@@ -76,4 +87,71 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
             },
         )
     }
+
+    // ---------- Силовые тренировки ----------
+    composable(
+        Routes.WORKOUT_SESSION_PATTERN,
+        arguments = listOf(
+            navArgument("id") { type = NavType.LongType },
+            navArgument("edit") { type = NavType.BoolType; defaultValue = false },
+        ),
+    ) { entry ->
+        val picked = entry.pickedExercises()
+        SessionScreen(
+            onBack = back,
+            onFinished = { id ->
+                if (id == null) {
+                    nav.popBackStack()
+                } else {
+                    nav.navigate(Routes.workoutSummary(id)) {
+                        popUpTo(Routes.WORKOUT_SESSION_PATTERN) { inclusive = true }
+                    }
+                }
+            },
+            onAddExercises = { go(Routes.library(mode = "pickMany", category = "STRENGTH")) },
+            onOpenExercise = { go(Routes.exercise(it)) },
+            pickedExercises = picked,
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(
+        Routes.WORKOUT_SUMMARY_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType }),
+    ) {
+        WorkoutSummaryScreen(onDone = back)
+    }
+    composable(
+        Routes.WORKOUT_DETAIL_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType }),
+    ) {
+        WorkoutDetailScreen(
+            onBack = back,
+            onEdit = { go(Routes.workoutSession(it, edit = true)) },
+            onOpenExercise = { go(Routes.exercise(it)) },
+        )
+    }
+    composable(Routes.HISTORY) {
+        HistoryScreen(onBack = back, onOpen = { go(Routes.workoutDetail(it)) })
+    }
+    composable(
+        Routes.ROUTINE_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) { entry ->
+        val picked = entry.pickedExercises()
+        RoutineEditorScreen(
+            onBack = back,
+            onAddExercises = { go(Routes.library(mode = "pickMany", category = "STRENGTH")) },
+            pickedExercises = picked,
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(Routes.TOOLS) { ToolsScreen(onBack = back) }
+}
+
+/** Результат выбора упражнений из библиотеки (кладётся в SavedStateHandle этого экрана). */
+@Composable
+private fun NavBackStackEntry.pickedExercises(): List<String>? {
+    val flow = remember(this) { savedStateHandle.getStateFlow<ArrayList<String>?>(Routes.RESULT_PICKED_EXERCISES, null) }
+    val value by flow.collectAsStateWithLifecycle()
+    return value
 }

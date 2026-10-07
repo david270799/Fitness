@@ -259,7 +259,7 @@ fun SelectorButton(
             Text(
                 value,
                 style = MaterialTheme.typography.labelLarge,
-                color = if (active) Iron.colors.accent else Iron.colors.text,
+                color = if (active) Iron.colors.accentText else Iron.colors.text,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )

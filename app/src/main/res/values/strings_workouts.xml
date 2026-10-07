@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Таймер отдыха -->
+    <string name="notif_channel_timer">Таймеры</string>
+    <string name="notif_channel_timer_desc">Отдых между подходами и интервальные тренировки</string>
+    <string name="timer_rest_title">Отдых</string>
+    <string name="timer_rest_text">До следующего подхода</string>
+    <string name="timer_minus_15">−15 с</string>
+    <string name="timer_plus_15">+15 с</string>
+    <string name="timer_skip">Пропустить</string>
+    <string name="timer_rest_label">ОТДЫХ</string>
+    <string name="timer_rest_after">После: %1$s</string>
+    <string name="timer_start_rest">Запустить отдых</string>
+
+    <!-- Раздел «Тренировки» -->
+    <string name="workouts_tab_strength">Силовые</string>
+    <string name="workouts_tab_cardio">Кардио</string>
+    <string name="workouts_tab_stretching">Растяжка</string>
+    <string name="workouts_cardio_soon">Кардио и конструктор интервалов появятся на следующем этапе.</string>
+    <string name="workouts_stretching_soon">Растяжка появится на одном из следующих этапов.</string>
+    <string name="workouts_start_empty">Пустая тренировка</string>
+    <string name="workouts_routines">Шаблоны</string>
+    <string name="workouts_new_routine">Новый шаблон</string>
+    <string name="workouts_no_routines">Шаблонов пока нет. Создайте первый — например, «Верх А» или «Ноги».</string>
+    <string name="workouts_recent">Последние тренировки</string>
+    <string name="workouts_history_all">Весь журнал</string>
+    <string name="workouts_no_history">Завершённые тренировки появятся здесь.</string>
+    <string name="workouts_tools">Калькуляторы</string>
+    <string name="workouts_active_title">Идёт тренировка</string>
+    <string name="workouts_active_since">%1$s · идёт %2$s</string>
+    <string name="workouts_already_active_title">Тренировка уже идёт</string>
+    <string name="workouts_already_active_text">Сначала завершите или отмените «%1$s».</string>
+    <string name="workouts_copy_suffix">" (копия)"</string>
+    <string name="workouts_routine_delete_title">Удалить шаблон?</string>
+    <string name="workouts_routine_delete_text">Шаблон «%1$s» будет удалён. Журнал тренировок не изменится.</string>
+    <string name="workouts_default_name">Тренировка</string>
+    <string name="workouts_last_done">Последний раз: %1$s</string>
+    <string name="workouts_never_done">Ещё не выполнялся</string>
+
+    <!-- Редактор шаблона -->
+    <string name="routine_new_title">Новый шаблон</string>
+    <string name="routine_edit_title">Шаблон</string>
+    <string name="routine_name">Название</string>
+    <string name="routine_name_hint">Например: Верх А</string>
+    <string name="routine_note">Заметка</string>
+    <string name="routine_exercises">Упражнения</string>
+    <string name="routine_add_exercise">Добавить упражнения</string>
+    <string name="routine_empty">Добавьте упражнения из библиотеки.</string>
+    <string name="routine_sets">Подходы</string>
+    <string name="routine_target_reps">Повторы</string>
+    <string name="routine_target_reps_hint">8-12</string>
+    <string name="routine_target_weight">Вес, кг</string>
+    <string name="routine_target_seconds">Время, с</string>
+    <string name="routine_rest">Отдых, с</string>
+    <string name="routine_superset_link">Суперсет со следующим</string>
+    <string name="routine_superset_unlink">Разъединить суперсет</string>
+    <string name="routine_superset">Суперсет</string>
+    <string name="routine_name_required">Введите название шаблона</string>
+    <string name="routine_exercises_required">Добавьте хотя бы одно упражнение</string>
+    <string name="routine_saved">Шаблон сохранён</string>
+    <string name="routine_drag">Перетащить</string>
+
+    <!-- Активная тренировка -->
+    <string name="session_finish">Завершить</string>
+    <string name="session_discard">Отменить тренировку</string>
+    <string name="session_discard_title">Отменить тренировку?</string>
+    <string name="session_discard_text">Все отметки этой тренировки будут удалены.</string>
+    <string name="session_finish_title">Завершить тренировку?</string>
+    <string name="session_finish_text">Не отмеченные подходы (%1$d) не попадут в журнал.</string>
+    <string name="session_finish_empty">Нет ни одного выполненного подхода. Тренировка не будет сохранена.</string>
+    <string name="session_add_exercise">Добавить упражнение</string>
+    <string name="session_add_set">Подход</string>
+    <string name="session_col_set">ПОДХОД</string>
+    <string name="session_col_previous">ПРОШЛЫЙ РАЗ</string>
+    <string name="session_col_kg">КГ</string>
+    <string name="session_col_reps">ПОВТ.</string>
+    <string name="session_col_sec">СЕК</string>
+    <string name="session_empty">Добавьте упражнения, чтобы начать записывать подходы.</string>
+    <string name="session_rename">Название тренировки</string>
+    <string name="session_note">Заметка к тренировке</string>
+    <string name="session_record">Рекорд</string>
+    <string name="session_missing_values">Введите повторы или время подхода</string>
+    <string name="session_new_record">Новый рекорд: %1$s</string>
+    <string name="session_target">Цель: %1$s</string>
+    <string name="session_hint_increase">все подходы на верхней границе — добавьте вес</string>
+    <string name="session_hint_add_reps">добавьте повтор в подходах</string>
+    <string name="session_hint_deload">прошлый раз было тяжело — чуть снизьте вес</string>
+    <string name="session_hint_bodyweight">на один повтор больше</string>
+    <string name="session_menu_up">Выше</string>
+    <string name="session_menu_down">Ниже</string>
+    <string name="session_menu_superset">Суперсет со следующим</string>
+    <string name="session_menu_unsuperset">Разъединить суперсет</string>
+    <string name="session_menu_note">Заметка</string>
+    <string name="session_menu_rest">Отдых после подхода</string>
+    <string name="session_menu_open">Карточка упражнения</string>
+    <string name="session_menu_remove">Убрать упражнение</string>
+    <string name="session_rest_value">Отдых: %1$s</string>
+    <string name="session_set_normal">Обычный</string>
+    <string name="session_set_warmup">Разминка</string>
+    <string name="session_set_drop">Дроп-сет</string>
+    <string name="session_set_failure">До отказа</string>
+    <string name="session_set_delete">Удалить подход</string>
+    <string name="session_set_type_warmup_short">Р</string>
+    <string name="session_set_type_drop_short">Д</string>
+    <string name="session_set_type_failure_short">О</string>
+    <string name="session_superset_label">СУПЕРСЕТ</string>
+    <string name="session_edit_title">Правка тренировки</string>
+    <string name="session_edit_hint">Сохранятся только подходы с отметкой ✓.</string>
+    <string name="session_edit_date">Дата</string>
+    <string name="session_edit_start_time">Начало</string>
+    <string name="session_edit_duration">Длительность, мин</string>
+    <string name="session_saved">Изменения сохранены</string>
+    <string name="session_unknown_exercise">Упражнение удалено</string>
+    <string name="session_notification_permission">Разрешите уведомления, чтобы видеть таймер отдыха на заблокированном экране.</string>
+
+    <!-- Итоги -->
+    <string name="summary_title">Итоги</string>
+    <string name="summary_done">Тренировка завершена</string>
+    <string name="summary_duration">Длительность</string>
+    <string name="summary_volume">Объём</string>
+    <string name="summary_sets">Подходы</string>
+    <string name="summary_exercises">Упражнения</string>
+    <string name="summary_calories">Калории</string>
+    <string name="summary_avg_rest">Средний отдых</string>
+    <string name="summary_records">Рекорды</string>
+    <string name="summary_no_records">В этот раз без рекордов — это нормально.</string>
+    <string name="summary_save_routine">Сохранить как шаблон</string>
+    <string name="summary_routine_saved">Сохранено в шаблоны</string>
+    <string name="summary_calories_note">≈ оценка по MET и вашему весу</string>
+    <string name="record_kind_weight">вес</string>
+    <string name="record_kind_reps">повторы</string>
+    <string name="record_kind_one_rm">расчётный 1ПМ</string>
+    <string name="record_kind_duration">время</string>
+    <string name="set_weight_reps">%1$s кг × %2$d</string>
+    <string name="set_reps_only">%1$d повт.</string>
+    <string name="set_seconds_only">%1$s</string>
+
+    <!-- Журнал -->
+    <string name="history_title">Журнал</string>
+    <string name="history_search">Поиск по названию</string>
+    <string name="history_empty">Ничего не найдено.</string>
+    <string name="history_records">%1$d рек.</string>
+    <string name="workout_detail_title">Тренировка</string>
+    <string name="workout_delete_title">Удалить тренировку?</string>
+    <string name="workout_delete_text">Тренировка пропадёт из журнала, рекорды будут пересчитаны.</string>
+    <string name="workout_type_strength">Силовая</string>
+    <string name="workout_type_cardio">Кардио</string>
+    <string name="workout_type_interval">Интервалы</string>
+    <string name="workout_type_stretching">Растяжка</string>
+    <string name="workout_started_at">Начало: %1$s</string>
+
+    <!-- История упражнения -->
+    <string name="exhist_best_weight">Макс. вес</string>
+    <string name="exhist_best_1rm">Расчётный 1ПМ</string>
+    <string name="exhist_best_reps">Макс. повторов</string>
+    <string name="exhist_best_duration">Макс. время</string>
+    <string name="exhist_sessions">Тренировок</string>
+    <string name="exhist_chart_1rm">Прогресс: расчётный 1ПМ, кг</string>
+    <string name="exhist_chart_reps">Прогресс: повторы за подход</string>
+    <string name="exhist_chart_duration">Прогресс: время, с</string>
+    <string name="exhist_recent">Последние тренировки</string>
+    <string name="exhist_chart_need_more">График появится после двух тренировок с этим упражнением.</string>
+
+    <!-- Калькуляторы -->
+    <string name="tools_title">Калькуляторы</string>
+    <string name="tools_plates">Блины</string>
+    <string name="tools_1rm">1ПМ</string>
+    <string name="tools_target_weight">Нужный вес, кг</string>
+    <string name="tools_bar">Гриф</string>
+    <string name="tools_per_side">На каждую сторону</string>
+    <string name="tools_only_bar">Только гриф</string>
+    <string name="tools_achieved">Получится: %1$s кг</string>
+    <string name="tools_remainder">Не хватает %1$s кг — нет подходящих блинов</string>
+    <string name="tools_plates_hint">Набор блинов и вес грифа меняются в настройках.</string>
+    <string name="tools_weight">Вес, кг</string>
+    <string name="tools_reps">Повторы</string>
+    <string name="tools_1rm_result">Расчётный 1ПМ</string>
+    <string name="tools_1rm_formula">Формула Эпли: вес × (1 + повторы / 30). Точнее всего при 2–10 повторах.</string>
+    <string name="tools_percent_table">Проценты от 1ПМ</string>
+    <string name="tools_col_percent" formatted="false">%</string>
+    <string name="tools_col_weight">КГ</string>
+    <string name="tools_col_reps">≈ ПОВТ.</string>
+
+    <!-- Настройки тренировок -->
+    <string name="settings_section_workouts">Тренировки</string>
+    <string name="settings_default_rest">Отдых по умолчанию</string>
+    <string name="settings_default_rest_sub">Для упражнений без своего времени отдыха</string>
+    <string name="settings_auto_rest">Запускать таймер отдыха автоматически</string>
+    <string name="settings_auto_rest_sub">После отметки подхода</string>
+    <string name="settings_keep_screen">Не выключать экран</string>
+    <string name="settings_keep_screen_sub">Во время тренировки</string>
+    <string name="settings_sound">Звук таймеров</string>
+    <string name="settings_vibration">Вибрация таймеров</string>
+    <string name="settings_bar_weight">Вес грифа</string>
+    <string name="settings_plates">Доступные блины, кг</string>
+
+    <!-- Сегодня -->
+    <string name="today_start_workout">Начать тренировку</string>
+    <string name="today_continue_workout">Продолжить тренировку</string>
+    <string name="today_next_planned">Следующая по плану</string>
+    <string name="today_no_plan">Создайте шаблоны в разделе «Тренировки» — здесь появится следующая тренировка по плану.</string>
+    <string name="today_week">Эта неделя</string>
+    <string name="today_week_streak">Серия</string>
+    <string name="today_activity">Активность</string>
+    <string name="today_last_workout">Последняя тренировка</string>
+    <string name="today_volume_week">Объём за неделю</string>
+    <string name="heatmap_less">меньше</string>
+    <string name="heatmap_more">больше</string>
+</resources>

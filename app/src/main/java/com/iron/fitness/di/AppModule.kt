@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.iron.fitness.core.db.IronDatabase
 import com.iron.fitness.feature.exercises.data.ExerciseDao
+import com.iron.fitness.feature.workouts.data.WorkoutDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +29,9 @@ object AppModule {
 
     @Provides
     fun provideExerciseDao(db: IronDatabase): ExerciseDao = db.exerciseDao()
+
+    @Provides
+    fun provideWorkoutDao(db: IronDatabase): WorkoutDao = db.workoutDao()
 
     @Provides
     @Singleton

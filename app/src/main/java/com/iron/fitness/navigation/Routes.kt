@@ -29,11 +29,23 @@ object Routes {
     const val EXERCISE_PATTERN = "exercise/{id}"
     const val EXERCISE_EDIT_PATTERN = "exercise_edit?id={id}&category={category}"
 
+    const val HISTORY = "workout_history"
+    const val TOOLS = "tools"
+    const val WORKOUT_SESSION_PATTERN = "workout_session/{id}?edit={edit}"
+    const val WORKOUT_SUMMARY_PATTERN = "workout_summary/{id}"
+    const val WORKOUT_DETAIL_PATTERN = "workout/{id}"
+    const val ROUTINE_EDIT_PATTERN = "routine_edit?id={id}"
+
     /** Ключ результата выбора упражнений в SavedStateHandle предыдущего экрана. */
     const val RESULT_PICKED_EXERCISES = "picked_exercises"
 
     fun library(mode: String = "browse", category: String? = null) =
         "library?mode=$mode" + (category?.let { "&category=$it" } ?: "")
+
+    fun workoutSession(id: Long, edit: Boolean = false) = "workout_session/$id?edit=$edit"
+    fun workoutSummary(id: Long) = "workout_summary/$id"
+    fun workoutDetail(id: Long) = "workout/$id"
+    fun routineEdit(id: Long? = null) = "routine_edit" + (id?.let { "?id=$it" } ?: "")
 
     fun exercise(id: String) = "exercise/${android.net.Uri.encode(id)}"
 

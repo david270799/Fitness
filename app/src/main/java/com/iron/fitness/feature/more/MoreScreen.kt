@@ -29,6 +29,8 @@ private data class MoreItem(
 
 private val items = listOf(
     MoreItem(Routes.library(), R.string.more_library, R.string.more_library_sub, IronIcons.List),
+    MoreItem(Routes.HISTORY, R.string.history_title, R.string.more_history_sub, IronIcons.History),
+    MoreItem(Routes.TOOLS, R.string.more_tools, R.string.more_tools_sub, IronIcons.Calculator),
     MoreItem(Routes.SETTINGS, R.string.more_settings, R.string.more_settings_sub, IronIcons.Settings),
     MoreItem(Routes.ABOUT, R.string.more_about, R.string.more_about_sub, IronIcons.Info),
 )
@@ -47,7 +49,7 @@ fun MoreScreen(navigate: (String) -> Unit) {
                         title = stringResource(item.title),
                         subtitle = stringResource(item.subtitle),
                         icon = item.icon,
-                        iconTint = Iron.colors.accent,
+                        iconTint = Iron.colors.accentText,
                         trailing = { IronIcon(IronIcons.ChevronRight, null, tint = Iron.colors.textSecondary) },
                     )
                 }
