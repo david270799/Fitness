@@ -9,6 +9,7 @@ import com.iron.fitness.core.util.withRussianLocale
 object NotificationChannels {
     const val DOWNLOADS = "downloads"
     const val TIMER = "timer"
+    const val CHALLENGES = "challenges"
 
     fun createAll(context: Context) {
         val ru = context.withRussianLocale()
@@ -20,6 +21,7 @@ object NotificationChannels {
                 setShowBadge(false)
                 lockscreenVisibility = android.app.Notification.VISIBILITY_PUBLIC
             },
+            NotificationChannel(CHALLENGES, ru.getString(R.string.notif_channel_challenges), NotificationManager.IMPORTANCE_DEFAULT),
         ) + extraChannels(ru)
         manager.createNotificationChannels(channels)
     }

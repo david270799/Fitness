@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_challenges">Дневные челленджи</string>
+    <string name="challenge_notif_text">Сегодня %1$d из %2$d — осталось %3$d</string>
+
+    <string name="today_daily">Дневное</string>
+    <string name="challenge_new">Новый челлендж</string>
+    <string name="challenge_edit">Челлендж</string>
+    <string name="challenge_intro">Ежедневные мини-цели: отжимания, приседания, планка. Отмечайте подходы в течение дня — серия растёт, пока цель выполняется каждый день.</string>
+    <string name="challenge_quick">Быстрый старт</string>
+    <string name="qc_pushups">Отжимания</string>
+    <string name="qc_squats">Приседания</string>
+    <string name="qc_plank">Планка</string>
+    <string name="qc_abs">Пресс</string>
+    <string name="qc_pullups">Подтягивания</string>
+
+    <string name="challenge_streak_best">серия %1$d · лучшая %2$d</string>
+    <string name="challenge_timer">Таймер</string>
+    <string name="challenge_custom">+Своё</string>
+    <string name="challenge_custom_title">Добавить</string>
+    <string name="challenge_custom_label">Сколько</string>
+    <string name="challenge_custom_hint">Отрицательное число исправит ошибку, например −10</string>
+
+    <string name="challenge_streak">Серия</string>
+    <string name="challenge_best">Лучшая серия</string>
+    <string name="challenge_best_day">Рекорд за день</string>
+    <string name="challenge_total">Всего</string>
+    <string name="challenge_week">Последние 7 дней</string>
+    <string name="challenge_week_done">%1$d из %2$d дней</string>
+    <string name="challenge_goal_history">История цели</string>
+    <string name="challenge_goal_since">%1$s — с %2$s</string>
+    <string name="challenge_log">Записи</string>
+    <string name="challenge_archive">В архив</string>
+    <string name="challenge_unarchive">Вернуть из архива</string>
+    <string name="challenge_delete_title">Удалить челлендж?</string>
+    <string name="challenge_delete_text">Вся история и серии будут удалены.</string>
+
+    <string name="challenge_name">Название</string>
+    <string name="challenge_name_hint">Например: Отжимания</string>
+    <string name="challenge_unit">Что считаем</string>
+    <string name="challenge_unit_reps">Повторы</string>
+    <string name="challenge_unit_seconds">Секунды</string>
+    <string name="challenge_goal">Цель на день, повторов</string>
+    <string name="challenge_goal_seconds">Цель на день, секунд</string>
+    <string name="challenge_goal_change_hint">Новая цель действует с сегодняшнего дня; прошлые дни оцениваются по старой</string>
+    <string name="challenge_step1">Кнопка 1</string>
+    <string name="challenge_step2">Кнопка 2</string>
+    <string name="challenge_reminder">Напоминание</string>
+    <string name="challenge_reminder_sub">Раз в день, если цель ещё не выполнена</string>
+    <string name="challenge_reminder_time">Время: %1$s</string>
+</resources>

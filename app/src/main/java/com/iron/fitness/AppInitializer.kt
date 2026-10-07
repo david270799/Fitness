@@ -1,5 +1,6 @@
 package com.iron.fitness
 
+import com.iron.fitness.core.alarms.AlarmRescheduler
 import com.iron.fitness.di.ApplicationScope
 import com.iron.fitness.feature.exercises.data.ExerciseRepository
 import kotlinx.coroutines.CoroutineScope
@@ -12,8 +13,11 @@ import javax.inject.Singleton
 class AppInitializer @Inject constructor(
     @ApplicationScope private val scope: CoroutineScope,
     private val exercises: ExerciseRepository,
+    private val alarms: AlarmRescheduler,
 ) {
     fun start() {
         scope.launch { runCatching { exercises.ensureLibraryImported() } }
+        // Будильники могли пропасть (принудительная остановка, обновление) — ставим заново.
+        scope.launch { alarms.rescheduleAll() }
     }
 }

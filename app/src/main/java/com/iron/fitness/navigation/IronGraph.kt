@@ -21,6 +21,8 @@ import com.iron.fitness.feature.cardio.run.IntervalRunScreen
 import com.iron.fitness.feature.cardio.ui.CardioLogScreen
 import com.iron.fitness.feature.cardio.ui.IntervalEditorScreen
 import com.iron.fitness.feature.stretching.ui.StretchEditorScreen
+import com.iron.fitness.feature.daily.ui.ChallengeDetailScreen
+import com.iron.fitness.feature.daily.ui.ChallengeEditScreen
 import com.iron.fitness.feature.workouts.history.HistoryScreen
 import com.iron.fitness.feature.workouts.history.WorkoutDetailScreen
 import com.iron.fitness.feature.workouts.routine.RoutineEditorScreen
@@ -177,6 +179,19 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
             pickedExercises = picked,
             onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
         )
+    }
+    // ---------- Дневные челленджи ----------
+    composable(
+        Routes.CHALLENGE_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType }),
+    ) {
+        ChallengeDetailScreen(onBack = back, onEdit = { go(Routes.challengeEdit(it)) })
+    }
+    composable(
+        Routes.CHALLENGE_EDIT_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
+    ) {
+        ChallengeEditScreen(onBack = back)
     }
     composable(
         Routes.CARDIO_LOG_PATTERN,

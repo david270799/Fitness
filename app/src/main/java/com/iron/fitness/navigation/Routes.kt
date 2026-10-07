@@ -39,6 +39,8 @@ object Routes {
     const val INTERVAL_EDIT_PATTERN = "interval_edit?id={id}"
     const val CARDIO_LOG_PATTERN = "cardio_log?id={id}"
     const val STRETCH_EDIT_PATTERN = "stretch_edit?id={id}"
+    const val CHALLENGE_PATTERN = "challenge/{id}"
+    const val CHALLENGE_EDIT_PATTERN = "challenge_edit?id={id}"
 
     /** Ключ результата выбора упражнений в SavedStateHandle предыдущего экрана. */
     const val RESULT_PICKED_EXERCISES = "picked_exercises"
@@ -53,6 +55,8 @@ object Routes {
     fun intervalEdit(id: Long? = null) = "interval_edit" + (id?.let { "?id=$it" } ?: "")
     fun cardioLog(id: Long? = null) = "cardio_log" + (id?.let { "?id=$it" } ?: "")
     fun stretchEdit(id: Long? = null) = "stretch_edit" + (id?.let { "?id=$it" } ?: "")
+    fun challenge(id: Long) = "challenge/$id"
+    fun challengeEdit(id: Long? = null) = "challenge_edit" + (id?.let { "?id=$it" } ?: "")
 
     fun exercise(id: String) = "exercise/${android.net.Uri.encode(id)}"
 

@@ -28,6 +28,11 @@ class MigrationSqlTest {
     private fun createSql(db: JsonObject, table: String): String =
         entity(db, table)["createSql"]!!.jsonPrimitive.content.replace("\${TABLE_NAME}", table)
 
+    private fun indexSql(db: JsonObject, table: String): List<String> =
+        entity(db, table)["indices"]?.jsonArray.orEmpty().map {
+            it.jsonObject["createSql"]!!.jsonPrimitive.content.replace("\${TABLE_NAME}", table)
+        }
+
     /** Схема текущей версии: таблицы, созданные миграциями, с тех пор не менялись. */
     private fun current() = database(IronDatabase.VERSION)
 
@@ -53,6 +58,16 @@ class MigrationSqlTest {
     fun stretchRoutinesTableMatchesRoom() {
         val db = current()
         assertEquals(createSql(db, "stretch_routines"), IronMigrations.CREATE_STRETCH_ROUTINES)
+    }
+
+    @Test
+    fun challengeTablesMatchRoom() {
+        val db = current()
+        assertEquals(createSql(db, "challenges"), IronMigrations.CREATE_CHALLENGES)
+        assertEquals(createSql(db, "challenge_goals"), IronMigrations.CREATE_CHALLENGE_GOALS)
+        assertEquals(createSql(db, "challenge_logs"), IronMigrations.CREATE_CHALLENGE_LOGS)
+        assertEquals(listOf(IronMigrations.INDEX_CHALLENGE_GOALS), indexSql(db, "challenge_goals"))
+        assertEquals(listOf(IronMigrations.INDEX_CHALLENGE_LOGS), indexSql(db, "challenge_logs"))
     }
 
     @Test

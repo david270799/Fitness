@@ -35,6 +35,8 @@ import com.iron.fitness.core.util.Fmt
 import com.iron.fitness.core.domain.StretchPhase
 import com.iron.fitness.core.ui.components.IronChip
 import com.iron.fitness.core.ui.components.IronIcon
+import com.iron.fitness.core.ui.components.GhostButton
+import com.iron.fitness.feature.daily.ui.ChallengeCard
 import com.iron.fitness.feature.stretching.ui.MarkStretchSheet
 import com.iron.fitness.feature.stretching.ui.stretchPhaseLabel
 import com.iron.fitness.feature.workouts.ActiveWorkoutBanner
@@ -109,6 +111,21 @@ fun TodayScreen(
                 sub = stringResource(R.string.unit_kg),
                 modifier = Modifier.weight(1f),
             )
+        }
+
+        val challengeList by viewModel.challengeList.collectAsStateWithLifecycle()
+        if (challengeList.isNotEmpty()) {
+            SectionTitle(stringResource(R.string.today_daily)) {
+                GhostButton(stringResource(R.string.action_open), { navigate(Routes.DAILY) })
+            }
+            challengeList.forEach { ui ->
+                ChallengeCard(
+                    ui = ui,
+                    onAdd = { viewModel.addToChallenge(ui.challenge.id, it) },
+                    onOpen = { navigate(Routes.challenge(ui.challenge.id)) },
+                    compact = true,
+                )
+            }
         }
 
         StretchTodayCard(

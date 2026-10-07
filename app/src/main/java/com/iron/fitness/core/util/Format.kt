@@ -49,6 +49,19 @@ object Fmt {
         }
     }
 
+    /** Разбор времени «7:30», «19.05». */
+    fun parseTime(text: String): java.time.LocalTime? {
+        val parts = text.trim().split(':', '.')
+        if (parts.size != 2) return null
+        val h = parts[0].trim().toIntOrNull() ?: return null
+        val m = parts[1].trim().toIntOrNull() ?: return null
+        if (h !in 0..23 || m !in 0..59) return null
+        return java.time.LocalTime.of(h, m)
+    }
+
+    /** «07:05» из минут от полуночи. */
+    fun minutesOfDay(minutes: Int): String = String.format(RU, "%02d:%02d", minutes / 60, minutes % 60)
+
     /** Разбор числа, введённого пользователем: принимает и запятую, и точку. */
     fun parse(text: String): Double? = text.trim().replace(',', '.').replace(" ", "").toDoubleOrNull()
 

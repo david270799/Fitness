@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iron.fitness.core.domain.StretchPhase
 import com.iron.fitness.core.domain.Streaks
+import com.iron.fitness.feature.daily.data.ChallengeRepository
+import com.iron.fitness.feature.daily.data.ChallengeUi
 import com.iron.fitness.feature.stretching.data.StretchLauncher
 import com.iron.fitness.feature.stretching.data.StretchRepository
 import com.iron.fitness.feature.stretching.data.StretchTemplates
@@ -45,7 +47,16 @@ class TodayViewModel @Inject constructor(
     private val repo: WorkoutRepository,
     private val stretchRepo: StretchRepository,
     private val stretch: StretchLauncher,
+    private val challenges: ChallengeRepository,
 ) : ViewModel() {
+
+    /** Дневные челленджи для мини-карточек. */
+    val challengeList: StateFlow<List<ChallengeUi>> = challenges.observeActive()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    fun addToChallenge(id: Long, amount: Int) {
+        viewModelScope.launch { challenges.add(id, amount) }
+    }
 
     private val since: Long = LocalDate.now().minusWeeks(HEATMAP_WEEKS.toLong() + 1)
         .atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()

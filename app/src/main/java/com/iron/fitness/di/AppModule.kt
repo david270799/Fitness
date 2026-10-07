@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.iron.fitness.core.db.IronDatabase
 import com.iron.fitness.core.db.IronMigrations
 import com.iron.fitness.feature.cardio.data.IntervalDao
+import com.iron.fitness.feature.daily.data.ChallengeDao
 import com.iron.fitness.feature.stretching.data.StretchDao
 import com.iron.fitness.feature.exercises.data.ExerciseDao
 import com.iron.fitness.feature.workouts.data.WorkoutDao
@@ -42,6 +43,9 @@ object AppModule {
 
     @Provides
     fun provideStretchDao(db: IronDatabase): StretchDao = db.stretchDao()
+
+    @Provides
+    fun provideChallengeDao(db: IronDatabase): ChallengeDao = db.challengeDao()
 
     @Provides
     @Singleton
