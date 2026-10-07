@@ -26,6 +26,10 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,6 +50,8 @@ import com.iron.fitness.core.ui.components.IronIcon
 import com.iron.fitness.core.ui.components.IronIconButton
 import com.iron.fitness.navigation.Routes
 import com.iron.fitness.core.ui.components.SwitchRow
+import com.iron.fitness.core.ui.components.TextInputDialog
+import com.iron.fitness.feature.assistant.aiErrorText
 import com.iron.fitness.core.ui.components.PrimaryButton
 import com.iron.fitness.core.ui.components.SecondaryButton
 import com.iron.fitness.core.util.Fmt
@@ -76,6 +82,7 @@ fun SettingsScreen(
             AppearanceSection(settings, viewModel)
             WorkoutSection(settings, viewModel)
             ReminderSection(settings, viewModel, navigate)
+            AssistantSection(settings, viewModel)
             CaloriesSection(viewModel)
             ImagesSection(viewModel)
             Spacer(Modifier.height(24.dp))
@@ -284,6 +291,98 @@ private fun ReminderSection(settings: AppSettings, viewModel: SettingsViewModel,
             icon = IronIcons.Shield,
             onClick = { navigate(Routes.PERMISSIONS) },
             trailing = { IronIcon(IronIcons.ChevronRight, null, tint = Iron.colors.textSecondary) },
+        )
+    }
+}
+
+private const val AI_STUDIO_URL = "https://aistudio.google.com/apikey"
+
+@Composable
+private fun AssistantSection(settings: AppSettings, viewModel: SettingsViewModel) {
+    val hasKey by viewModel.hasGeminiKey.collectAsStateWithLifecycle()
+    val check by viewModel.keyCheck.collectAsStateWithLifecycle()
+    var keyDialog by rememberSaveable { mutableStateOf(false) }
+    var modelDialog by rememberSaveable { mutableStateOf(false) }
+    val uriHandler = LocalUriHandler.current
+    SectionTitle(stringResource(R.string.settings_section_assistant))
+    IronCard(contentPadding = PaddingValues(0.dp)) {
+        ListRow(
+            title = stringResource(R.string.settings_ai_key),
+            subtitle = if (hasKey) {
+                stringResource(R.string.settings_ai_key_saved, viewModel.keyTail().orEmpty())
+            } else {
+                stringResource(R.string.settings_ai_key_none)
+            },
+            icon = IronIcons.Shield,
+            onClick = { keyDialog = true },
+            trailing = { IronIcon(IronIcons.Edit, null, tint = Iron.colors.textSecondary) },
+        )
+        IronDivider()
+        ListRow(
+            title = stringResource(R.string.settings_ai_model),
+            subtitle = settings.geminiModel,
+            icon = IronIcons.Sparkles,
+            onClick = { modelDialog = true },
+            trailing = { IronIcon(IronIcons.Edit, null, tint = Iron.colors.textSecondary) },
+        )
+        IronDivider()
+        SwitchRow(
+            title = stringResource(R.string.settings_ai_body),
+            subtitle = stringResource(R.string.settings_ai_body_sub),
+            checked = settings.sendBodyDataToAssistant,
+            onCheckedChange = viewModel::setSendBodyData,
+            icon = IronIcons.Body,
+        )
+    }
+    IronCard {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.settings_ai_how), style = MaterialTheme.typography.bodyMedium, color = Iron.colors.textSecondary)
+            Text(stringResource(R.string.settings_ai_free_tier), style = MaterialTheme.typography.bodySmall, color = Iron.colors.warning)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                SecondaryButton(
+                    stringResource(R.string.settings_ai_get_key),
+                    { runCatching { uriHandler.openUri(AI_STUDIO_URL) } },
+                    icon = IronIcons.Link,
+                    modifier = Modifier.weight(1f),
+                )
+                PrimaryButton(
+                    stringResource(R.string.settings_ai_check),
+                    viewModel::checkKey,
+                    icon = IronIcons.CircleCheck,
+                    enabled = hasKey && check !is KeyCheck.Running,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+            when (val c = check) {
+                KeyCheck.Idle -> Unit
+                KeyCheck.Running -> Text(stringResource(R.string.settings_ai_checking), style = MaterialTheme.typography.bodySmall, color = Iron.colors.textSecondary)
+                is KeyCheck.Ok -> Text(stringResource(R.string.settings_ai_ok, c.model), style = MaterialTheme.typography.bodySmall, color = Iron.colors.success)
+                is KeyCheck.Failed -> Text(aiErrorText(c.kind), style = MaterialTheme.typography.bodySmall, color = Iron.colors.error)
+            }
+            if (hasKey) {
+                GhostButton(stringResource(R.string.settings_ai_key_delete), { viewModel.setGeminiKey(null) }, color = Iron.colors.textSecondary)
+            }
+        }
+    }
+    if (keyDialog) {
+        TextInputDialog(
+            title = stringResource(R.string.settings_ai_key),
+            initial = "",
+            label = stringResource(R.string.settings_ai_key_label),
+            supportingText = stringResource(R.string.settings_ai_key_hint),
+            validate = { it.isNotBlank() },
+            onConfirm = { viewModel.setGeminiKey(it); keyDialog = false },
+            onDismiss = { keyDialog = false },
+        )
+    }
+    if (modelDialog) {
+        TextInputDialog(
+            title = stringResource(R.string.settings_ai_model),
+            initial = settings.geminiModel,
+            label = stringResource(R.string.settings_ai_model_label),
+            supportingText = stringResource(R.string.settings_ai_model_hint, AppSettings.DEFAULT_GEMINI_MODEL),
+            onConfirm = { viewModel.setGeminiModel(it); modelDialog = false },
+            onDismiss = { modelDialog = false },
         )
     }
 }

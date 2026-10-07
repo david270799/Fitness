@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Общее -->
+    <string name="ai_thinking">Ассистент думает…</string>
+    <string name="ai_open_settings">Открыть настройки</string>
+    <string name="ai_not_in_library">Нет в библиотеке: «%1$s» — будет пропущено</string>
+    <string name="ai_unmatched_skipped">Упражнения с жёлтым значком не нашлись в библиотеке и не будут сохранены. Добавьте их как свои, если нужно.</string>
+    <string name="ai_check_before_save">Проверьте перед сохранением</string>
+    <string name="ai_err_no_key">Ключ API не задан. Добавьте свой ключ Gemini в настройках.</string>
+    <string name="ai_err_invalid_key">Ключ не подошёл. Проверьте, что он скопирован полностью.</string>
+    <string name="ai_err_quota">Лимит запросов исчерпан. Подождите минуту или попробуйте завтра.</string>
+    <string name="ai_err_overloaded">Сервис перегружен. Попробуйте ещё раз чуть позже.</string>
+    <string name="ai_err_model">Модель не найдена. Проверьте название модели в настройках.</string>
+    <string name="ai_err_blocked">Ответ заблокирован фильтрами безопасности. Переформулируйте запрос.</string>
+    <string name="ai_err_network">Нет связи с сервисом. Проверьте интернет.</string>
+    <string name="ai_err_bad_response">Ассистент ответил непонятно. Попробуйте ещё раз.</string>
+
+    <!-- Главный экран ассистента -->
+    <string name="ai_need_key_title">Нужен ключ Gemini</string>
+    <string name="ai_need_key_text">Ассистент работает на вашем собственном ключе. Получите бесплатный ключ в Google AI Studio и вставьте его в настройках — он хранится только на телефоне в зашифрованном виде.</string>
+    <string name="ai_privacy">Ассистенту отправляется только то, что нужно для конкретного запроса — это всегда написано на экране. Данные тела (вес, замеры, InBody) уходят только если это разрешено в настройках. Ассистент ничего не меняет сам: всё сохраняется только после вашей проверки.</string>
+    <string name="ai_f_workout">Составить тренировку</string>
+    <string name="ai_f_workout_sub">По цели, времени и инвентарю → шаблон</string>
+    <string name="ai_f_log">Записать словами</string>
+    <string name="ai_f_log_sub">Голосом или текстом → тренировка в журнал</string>
+    <string name="ai_f_review">Разбор недели</string>
+    <string name="ai_f_review_sub">Что получилось и что поправить</string>
+    <string name="ai_f_substitute">Замена упражнения</string>
+    <string name="ai_f_substitute_sub">Нет снаряда, болит или надоело</string>
+    <string name="ai_f_stretch">Подобрать растяжку</string>
+    <string name="ai_f_stretch_sub">Под прошедшую тренировку</string>
+    <string name="ai_f_progression">Прогрессия</string>
+    <string name="ai_f_progression_sub">Сколько поднимать в следующий раз и почему</string>
+    <string name="ai_f_inbody">InBody</string>
+    <string name="ai_f_inbody_sub">Распознать бланк по фото, динамика и разбор</string>
+
+    <!-- Составить тренировку -->
+    <string name="ai_goal">Цель</string>
+    <string name="ai_goal_hint">Например: верх тела, упор на спину; колено побаливает</string>
+    <string name="ai_goal_default">Сбалансированная силовая тренировка на всё тело</string>
+    <string name="ai_minutes">Время</string>
+    <string name="ai_level">Уровень</string>
+    <string name="ai_equipment">Инвентарь</string>
+    <string name="ai_generate">Составить</string>
+    <string name="ai_sent_workout">Отправляется: цель, время, уровень, инвентарь и названия упражнений из вашей библиотеки.</string>
+    <string name="ai_rest_sec">отдых %1$d с</string>
+    <string name="ai_routine_default">Тренировка от ассистента</string>
+
+    <!-- Записать словами -->
+    <string name="ai_log_hint">Расскажите, что сделали: упражнения, веса, повторы. Ассистент разберёт текст, а вы проверите результат перед сохранением.</string>
+    <string name="ai_log_text">Что сделали</string>
+    <string name="ai_log_example">Жим лёжа 60 на 10, 70 на 8, 70 на 8. Подтягивания 3 по 8. Планка 2 по минуте.</string>
+    <string name="ai_log_voice">Голосом</string>
+    <string name="ai_log_speak">Расскажите о тренировке</string>
+    <string name="ai_log_parse">Разобрать</string>
+    <string name="ai_sent_log">Отправляется: ваш текст и названия упражнений из библиотеки.</string>
+    <string name="ai_log_save">Сохранить в журнал</string>
+
+    <!-- Разбор недели -->
+    <string name="ai_review_what_sent">Что будет отправлено</string>
+    <string name="ai_review_body_hint">Данные тела добавляются, только если включено «Отправлять данные тела ассистенту» в настройках.</string>
+    <string name="ai_review_get">Получить разбор</string>
+
+    <!-- Замена -->
+    <string name="ai_sub_exercise">Упражнение</string>
+    <string name="ai_sub_pick">Выбрать упражнение</string>
+    <string name="ai_sub_reason">Причина</string>
+    <string name="ai_sub_find">Найти замену</string>
+    <string name="ai_reason_equipment">Нет снаряда</string>
+    <string name="ai_reason_pain">Неприятно или больно</string>
+    <string name="ai_reason_variety">Для разнообразия</string>
+    <string name="ai_reason_home">Тренируюсь дома</string>
+
+    <!-- Растяжка -->
+    <string name="ai_stretch_before">До тренировки</string>
+    <string name="ai_stretch_after">После тренировки</string>
+    <string name="ai_stretch_any">Отдельно</string>
+    <string name="ai_stretch_name">Растяжка от ассистента</string>
+    <string name="ai_stretch_hint">Отправляется: тип растяжки и мышцы последней силовой тренировки.</string>
+    <string name="ai_stretch_get">Подобрать</string>
+
+    <!-- Прогрессия -->
+    <string name="ai_prog_rules">Правило приложения — двойная прогрессия. Вес держим, пока во всех рабочих подходах не будет верх диапазона повторов. Потом добавляем минимальный шаг веса и начинаем с низа диапазона. Если подходы сильно не дотянули — вес снижаем.</string>
+    <string name="ai_prog_range">Диапазон %1$d–%2$d повторов · шаг %3$s кг</string>
+    <string name="ai_prog_last">Прошлый раз: %1$s</string>
+    <string name="ai_prog_no_history">Истории пока нет — начните с комфортного веса, с которым выполняете все повторы чисто.</string>
+    <string name="ai_prog_why_increase">Во всех подходах достигнут верх диапазона — пора добавить вес.</string>
+    <string name="ai_prog_why_reps">Вес тот же — добавьте повтор в подходах, где не добрали до верха.</string>
+    <string name="ai_prog_why_deload">Подходы заметно не дотянули до диапазона — снизьте вес и наберите технику.</string>
+    <string name="ai_prog_why_bodyweight">Упражнение без веса — добавьте повтор.</string>
+    <string name="ai_prog_ask">Объяснить подробнее с ассистентом</string>
+
+    <!-- InBody -->
+    <string name="unit_liter">л</string>
+    <string name="ib_weight">Вес</string>
+    <string name="ib_smm">Скелетные мышцы</string>
+    <string name="ib_fat_mass">Масса жира</string>
+    <string name="ib_pbf">Процент жира</string>
+    <string name="ib_bmi">ИМТ</string>
+    <string name="ib_visceral">Висцеральный жир</string>
+    <string name="ib_bmr">Основной обмен</string>
+    <string name="ib_tbw">Вода в организме</string>
+    <string name="ib_lean">Безжировая масса</string>
+    <string name="ib_score">Оценка InBody</string>
+    <string name="ib_ecw">Индекс ВКЖ/ОВ</string>
+    <string name="ib_arm_l">Левая рука, мышцы</string>
+    <string name="ib_arm_r">Правая рука, мышцы</string>
+    <string name="ib_trunk">Корпус, мышцы</string>
+    <string name="ib_leg_l">Левая нога, мышцы</string>
+    <string name="ib_leg_r">Правая нога, мышцы</string>
+    <string name="ib_new">Новый результат</string>
+    <string name="ib_empty">Результатов InBody пока нет. Сфотографируйте бланк — ассистент перенесёт цифры, а вы проверите.</string>
+    <string name="ib_latest">Последний замер · %1$s</string>
+    <string name="ib_how">Снимите бланк целиком, ровно и без бликов. Можно выбрать готовое фото из галереи или ввести цифры вручную.</string>
+    <string name="ib_manual">Ввести вручную</string>
+    <string name="ib_reading">Распознаю бланк…</string>
+    <string name="ib_review_title">Проверьте значения</string>
+    <string name="ib_review_hint">Поля, выделенные красным, ассистент прочитал неуверенно или не нашёл — сверьте их с бланком.</string>
+    <string name="ib_date">Дата: %1$s</string>
+    <string name="ib_check">Проверьте</string>
+    <string name="ib_add_measurement">Добавить в замеры</string>
+    <string name="ib_add_measurement_sub">Вес и процент жира появятся в разделе «Тело»</string>
+    <string name="ib_warning_title">Перед отправкой фото</string>
+    <string name="ib_warning_text">Фото бланка будет отправлено в Google Gemini для распознавания. Если вы используете бесплатный ключ, Google может использовать отправленные данные для улучшения своих сервисов. Отправлять?</string>
+    <string name="ib_warning_ok">Понятно, отправлять</string>
+    <string name="ib_analysis">Разбор ассистента</string>
+    <string name="ib_analyze">Разобрать результат</string>
+    <string name="ib_analyze_again">Разобрать заново</string>
+    <string name="ib_analysis_note">Отправляются только цифры этого и предыдущего замера, без фото. Это не медицинская консультация.</string>
+    <string name="ib_delete_text">Результат и фото бланка будут удалены.</string>
+
+    <!-- Настройки ассистента -->
+    <string name="settings_section_assistant">Ассистент</string>
+    <string name="settings_ai_key">Ключ API Gemini</string>
+    <string name="settings_ai_key_none">Не задан</string>
+    <string name="settings_ai_key_saved">Сохранён · …%1$s</string>
+    <string name="settings_ai_key_label">Ключ</string>
+    <string name="settings_ai_key_hint">Хранится только на этом телефоне в зашифрованном виде и не попадает в бэкапы.</string>
+    <string name="settings_ai_key_delete">Удалить ключ</string>
+    <string name="settings_ai_model">Модель</string>
+    <string name="settings_ai_model_label">Название модели</string>
+    <string name="settings_ai_model_hint">По умолчанию: %1$s. Оставьте пустым, чтобы вернуть.</string>
+    <string name="settings_ai_body">Отправлять данные тела ассистенту</string>
+    <string name="settings_ai_body_sub">Вес, замеры и InBody в разборе недели</string>
+    <string name="settings_ai_how">Ключ бесплатно выдаётся в Google AI Studio: войдите в аккаунт Google → Create API key → скопируйте ключ и вставьте сюда.</string>
+    <string name="settings_ai_free_tier">На бесплатном ключе Google может использовать отправленные запросы для улучшения своих сервисов. Не отправляйте то, чем не готовы делиться.</string>
+    <string name="settings_ai_get_key">Получить ключ</string>
+    <string name="settings_ai_check">Проверить</string>
+    <string name="settings_ai_checking">Проверяю…</string>
+    <string name="settings_ai_ok">Работает · модель %1$s</string>
+</resources>

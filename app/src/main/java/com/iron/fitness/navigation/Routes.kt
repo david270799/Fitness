@@ -50,6 +50,16 @@ object Routes {
     const val REMINDER_EDIT_PATTERN = "reminder_edit?id={id}"
     const val CHALLENGE_EDIT_PATTERN = "challenge_edit?id={id}"
 
+    const val AI_WORKOUT = "ai_workout"
+    const val AI_LOG = "ai_log"
+    const val AI_REVIEW = "ai_review"
+    const val AI_SUBSTITUTE = "ai_substitute"
+    const val AI_STRETCH = "ai_stretch"
+    const val AI_PROGRESSION = "ai_progression"
+    const val INBODY = "inbody"
+    const val INBODY_NEW = "inbody_new"
+    const val INBODY_DETAIL_PATTERN = "inbody/{id}"
+
     /** Ключ результата выбора упражнений в SavedStateHandle предыдущего экрана. */
     const val RESULT_PICKED_EXERCISES = "picked_exercises"
 
@@ -69,6 +79,7 @@ object Routes {
     fun bodyMetric(metric: String) = "body_metric/$metric"
     fun reminderEdit(id: Long? = null) = "reminder_edit" + (id?.let { "?id=$it" } ?: "")
     fun challengeEdit(id: Long? = null) = "challenge_edit" + (id?.let { "?id=$it" } ?: "")
+    fun inBodyDetail(id: Long) = "inbody/$id"
 
     fun exercise(id: String) = "exercise/${android.net.Uri.encode(id)}"
 

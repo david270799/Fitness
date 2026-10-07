@@ -6,7 +6,16 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.iron.fitness.core.settings.AppSettings
-import com.iron.fitness.feature.assistant.AssistantPlaceholderScreen
+import com.iron.fitness.feature.assistant.AssistantScreen
+import com.iron.fitness.feature.assistant.GenerateWorkoutScreen
+import com.iron.fitness.feature.assistant.LogWorkoutScreen
+import com.iron.fitness.feature.assistant.ProgressionScreen
+import com.iron.fitness.feature.assistant.StretchSuggestScreen
+import com.iron.fitness.feature.assistant.SubstituteScreen
+import com.iron.fitness.feature.assistant.WeeklyReviewScreen
+import com.iron.fitness.feature.inbody.InBodyDetailScreen
+import com.iron.fitness.feature.inbody.InBodyListScreen
+import com.iron.fitness.feature.inbody.InBodyNewScreen
 import com.iron.fitness.feature.body.BodyScreen
 import com.iron.fitness.feature.daily.DailyScreen
 import com.iron.fitness.feature.exercises.ui.ExerciseDetailScreen
@@ -55,7 +64,7 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
 
     composable(Routes.SETTINGS) { SettingsScreen(onBack = back, navigate = go) }
     composable(Routes.ABOUT) { AboutScreen(onBack = back) }
-    composable(Routes.ASSISTANT) { AssistantPlaceholderScreen(onBack = back) }
+    composable(Routes.ASSISTANT) { AssistantScreen(onBack = back, navigate = go) }
 
     composable(
         Routes.LIBRARY_PATTERN,
@@ -244,6 +253,45 @@ fun NavGraphBuilder.ironGraph(nav: NavHostController, settings: AppSettings) {
         arguments = listOf(navArgument("id") { type = NavType.LongType; defaultValue = -1L }),
     ) {
         CardioLogScreen(onBack = back)
+    }
+
+    // ---------- Ассистент ----------
+    composable(Routes.AI_WORKOUT) { GenerateWorkoutScreen(onBack = back, navigate = go) }
+    composable(Routes.AI_LOG) { LogWorkoutScreen(onBack = back, navigate = go) }
+    composable(Routes.AI_REVIEW) { WeeklyReviewScreen(onBack = back, navigate = go) }
+    composable(Routes.AI_STRETCH) { StretchSuggestScreen(onBack = back, navigate = go) }
+    composable(Routes.AI_SUBSTITUTE) { entry ->
+        SubstituteScreen(
+            onBack = back,
+            navigate = go,
+            picked = entry.pickedExercises(),
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(Routes.AI_PROGRESSION) { entry ->
+        ProgressionScreen(
+            onBack = back,
+            navigate = go,
+            picked = entry.pickedExercises(),
+            onPickedHandled = { entry.savedStateHandle[Routes.RESULT_PICKED_EXERCISES] = null },
+        )
+    }
+    composable(Routes.INBODY) { InBodyListScreen(onBack = back, navigate = go) }
+    composable(Routes.INBODY_NEW) {
+        InBodyNewScreen(
+            onBack = back,
+            navigate = go,
+            onSaved = { id ->
+                nav.popBackStack()
+                go(Routes.inBodyDetail(id))
+            },
+        )
+    }
+    composable(
+        Routes.INBODY_DETAIL_PATTERN,
+        arguments = listOf(navArgument("id") { type = NavType.LongType }),
+    ) {
+        InBodyDetailScreen(onBack = back, navigate = go)
     }
 }
 

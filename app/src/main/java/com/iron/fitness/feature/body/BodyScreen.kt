@@ -169,7 +169,7 @@ fun BodyScreen(navigate: (String) -> Unit, viewModel: BodyViewModel = hiltViewMo
                     }
                 }
             }
-            item(key = "inbody") { BodyExtraSlot(navigate) }
+            item(key = "inbody") { InBodyCard(navigate) }
             if (s.insights.isNotEmpty()) {
                 item(key = "insights") { InsightsCard(s.insights) }
             }
@@ -195,9 +195,21 @@ fun BodyScreen(navigate: (String) -> Unit, viewModel: BodyViewModel = hiltViewMo
     }
 }
 
-/** Место для InBody (появится вместе с ассистентом). */
+/** Вход в раздел InBody. */
 @Composable
-fun BodyExtraSlot(navigate: (String) -> Unit) = Unit
+private fun InBodyCard(navigate: (String) -> Unit) {
+    IronCard(onClick = { navigate(Routes.INBODY) }, modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IronIcon(IronIcons.Scan, null, tint = Iron.colors.accentText)
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.ai_f_inbody), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.ai_f_inbody_sub), style = MaterialTheme.typography.bodySmall, color = Iron.colors.textSecondary)
+            }
+            IronIcon(IronIcons.ChevronRight, null, tint = Iron.colors.textSecondary)
+        }
+    }
+}
 
 @Composable
 private fun InsightsCard(insights: List<Insight>) {

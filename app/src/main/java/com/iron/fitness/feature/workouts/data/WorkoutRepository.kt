@@ -478,6 +478,45 @@ class WorkoutRepository @Inject constructor(
         recalculateTotals(workoutId)
     }
 
+    /** Подход для записи готовой тренировки (например, со слов ассистента). */
+    data class LoggedSet(val weightKg: Double?, val reps: Int?, val durationSec: Int?)
+
+    /** Сохранить уже выполненную тренировку целиком (после подтверждения пользователем). */
+    suspend fun saveLogged(
+        name: String,
+        startedAt: Long,
+        durationSec: Long,
+        exercises: List<Pair<String, List<LoggedSet>>>,
+    ): Long {
+        val workoutId = db.withTransaction {
+            val id = dao.insertWorkout(
+                WorkoutEntity(name = name, startedAt = startedAt, endedAt = startedAt + durationSec * 1000, durationSec = durationSec),
+            )
+            exercises.forEachIndexed { index, (exerciseId, sets) ->
+                val weId = dao.insertWorkoutExercise(WorkoutExerciseEntity(workoutId = id, exerciseId = exerciseId, position = index))
+                dao.insertSets(
+                    sets.mapIndexed { i, s ->
+                        WorkoutSetEntity(
+                            workoutExerciseId = weId,
+                            workoutId = id,
+                            exerciseId = exerciseId,
+                            position = i,
+                            weightKg = s.weightKg,
+                            reps = s.reps,
+                            durationSec = s.durationSec,
+                            completed = true,
+                            completedAt = startedAt + (i + 1) * 60_000L,
+                        )
+                    },
+                )
+            }
+            id
+        }
+        recomputeRecords(exercises.map { it.first })
+        recalculateTotals(workoutId)
+        return workoutId
+    }
+
     // ---------------- Шаблоны ----------------
 
     suspend fun saveRoutine(routine: RoutineEntity, items: List<RoutineExerciseEntity>): Long = db.withTransaction {

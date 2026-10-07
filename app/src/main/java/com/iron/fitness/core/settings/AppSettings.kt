@@ -33,7 +33,7 @@ data class AppSettings(
 ) {
     companion object {
         val DEFAULT_PLATES = listOf(25.0, 20.0, 15.0, 10.0, 5.0, 2.5, 1.25)
-        const val DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+        const val DEFAULT_GEMINI_MODEL = "gemini-3.8-flash"
         const val DEFAULT_BODY_WEIGHT_KG = 75.0
     }
 }

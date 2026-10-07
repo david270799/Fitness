@@ -6,6 +6,7 @@ import com.iron.fitness.core.db.IronDatabase
 import com.iron.fitness.core.db.IronMigrations
 import com.iron.fitness.feature.cardio.data.IntervalDao
 import com.iron.fitness.feature.body.data.BodyDao
+import com.iron.fitness.feature.inbody.InBodyDao
 import com.iron.fitness.feature.daily.data.ChallengeDao
 import com.iron.fitness.feature.reminders.data.ReminderDao
 import com.iron.fitness.feature.stretching.data.StretchDao
@@ -54,6 +55,9 @@ object AppModule {
 
     @Provides
     fun provideBodyDao(db: IronDatabase): BodyDao = db.bodyDao()
+
+    @Provides
+    fun provideInBodyDao(db: IronDatabase): InBodyDao = db.inBodyDao()
 
     @Provides
     @Singleton

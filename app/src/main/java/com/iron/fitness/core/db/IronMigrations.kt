@@ -105,5 +105,21 @@ object IronMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+    /** Этап 10: результаты InBody. */
+    const val CREATE_INBODY =
+        "CREATE TABLE IF NOT EXISTS `inbody_results` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "`day` INTEGER NOT NULL, `photoPath` TEXT, `weightKg` REAL, `skeletalMuscleKg` REAL, `bodyFatKg` REAL, " +
+            "`bodyFatPct` REAL, `bmi` REAL, `visceralFatLevel` REAL, `bmrKcal` REAL, `totalBodyWaterL` REAL, " +
+            "`leanMassKg` REAL, `inbodyScore` REAL, `ecwRatio` REAL, `armLeftLeanKg` REAL, `armRightLeanKg` REAL, " +
+            "`trunkLeanKg` REAL, `legLeftLeanKg` REAL, `legRightLeanKg` REAL, `analysis` TEXT, `createdAt` INTEGER NOT NULL)"
+    const val INDEX_INBODY = "CREATE INDEX IF NOT EXISTS `index_inbody_results_day` ON `inbody_results` (`day`)"
+
+    val MIGRATION_7_8 = object : Migration(7, 8) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(CREATE_INBODY)
+            db.execSQL(INDEX_INBODY)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
 }

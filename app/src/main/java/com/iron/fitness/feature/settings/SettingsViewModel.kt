@@ -2,6 +2,9 @@ package com.iron.fitness.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.iron.fitness.core.ai.GeminiClient
+import com.iron.fitness.core.ai.GeminiException
+import com.iron.fitness.core.ai.SecretStore
 import com.iron.fitness.core.settings.AppSettings
 import com.iron.fitness.core.settings.SettingsRepository
 import com.iron.fitness.core.settings.ThemeMode
@@ -27,7 +30,14 @@ class SettingsViewModel @Inject constructor(
     private val images: ExerciseImages,
     private val exercises: ExerciseRepository,
     private val bodyWeight: com.iron.fitness.core.body.BodyWeightProvider,
+    private val secrets: SecretStore,
+    private val gemini: GeminiClient,
 ) : ViewModel() {
+
+    val hasGeminiKey: StateFlow<Boolean> = secrets.hasGeminiKey
+
+    private val _keyCheck = MutableStateFlow<KeyCheck>(KeyCheck.Idle)
+    val keyCheck: StateFlow<KeyCheck> = _keyCheck.asStateFlow()
 
     private val _weightKg = MutableStateFlow<Double?>(null)
     /** Вес, по которому считаются калории. */
@@ -81,10 +91,46 @@ class SettingsViewModel @Inject constructor(
         if (next.isNotEmpty()) repo.setPlates(next)
     }
 
+    /** Последние 4 символа ключа — чтобы видеть, какой ключ сохранён. */
+    fun keyTail(): String? = secrets.geminiKey()?.takeLast(4)
+
+    fun setGeminiKey(key: String?) {
+        secrets.setGeminiKey(key)
+        _keyCheck.value = KeyCheck.Idle
+    }
+
+    fun setGeminiModel(model: String) = launch {
+        repo.setGeminiModel(model.ifBlank { AppSettings.DEFAULT_GEMINI_MODEL })
+        _keyCheck.value = KeyCheck.Idle
+    }
+
+    fun checkKey() {
+        _keyCheck.value = KeyCheck.Running
+        launch {
+            _keyCheck.value = try {
+                KeyCheck.Ok(gemini.ping())
+            } catch (e: GeminiException) {
+                KeyCheck.Failed(e.kind)
+            } catch (e: Exception) {
+                KeyCheck.Failed(GeminiException.Kind.NETWORK)
+            }
+        }
+    }
+
+    fun setSendBodyData(value: Boolean) = launch { repo.setSendBodyData(value) }
+
     fun downloadAllImages() = images.startDownloadAll()
     fun cancelImageDownload() = images.cancel()
     fun clearImageCache() = launch {
         withContext(Dispatchers.IO) { images.clearCache() }
         _cachedBytes.value = withContext(Dispatchers.IO) { images.cachedBytes() }
     }
+}
+
+/** Результат проверки ключа Gemini. */
+sealed interface KeyCheck {
+    data object Idle : KeyCheck
+    data object Running : KeyCheck
+    data class Ok(val model: String) : KeyCheck
+    data class Failed(val kind: GeminiException.Kind) : KeyCheck
 }
